@@ -1,33 +1,35 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Products from './components/pages/Products';
 import ContactUs from './components/pages/ContactUs';
-import SignUp from './components/pages/SignUp';
 import Search from './components/pages/Search';
-import Food from './components/pages/Food';
-import Clothes from './components/pages/Clothes';
-import Accessories from './components/pages/Accessories';
-import Shoes from './components/pages/Shoes';
 
+import CustomerLogin from './components/CustomerLogin';
+import AdminLogin from './components/AdminLogin';
+import SellerLogin from './components/SellerLogin';
+import { Account } from './components/Accounts';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import SellerHomePage from './components/SellerHomePage';
 
 function App() {
   return (
     <Router>
-      <Navbar />
+       <Account>
+    
       <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/products' component={Products} />
+        <Route path='/' exact component={CustomerLogin} />
+        <Route path='/admin' component={AdminLogin} />
+        <Route path='/seller' component={SellerLogin} />
+
+        <Route path='/home' exact component={Home} />
         <Route path='/search' component={Search} />
         <Route path='/contact-us' component={ContactUs} />
-        <Route path='/sign-up' component={SignUp} />
-        <Route path='/food' component={Food} />
-        <Route path='/clothes' component={Clothes} />
-        <Route path='/accessories' component={Accessories} />
-        <Route path='/shoes' component={Shoes} />
+
+        <Route path='/sellerhome' component={SellerHomePage} />
       </Switch>
+      </Account>
     </Router>
   );
 }

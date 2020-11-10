@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
-import Pool from '../UserPool';
-import { useHistory } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
+import './NavbarLogin.css';
 
-function Navbar() {
-  let history = useHistory();
+function NavbarLogin() {
   const [click, setClick] = useState(false);
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-
-  const logout = () => {
-    const user = Pool.getCurrentUser();
-    if (user) {
-      console.log("user exits");
-        user.signOut();
-        localStorage.removeItem("cartItems");
-        history.push("/");
-    }
-}
-
   return (
     <>
       <nav className='navbar'>
-        <Link to='/home' className='navbar-logo' onClick={closeMobileMenu}>
+        <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           SaaS Shoppe 
           <i class='fab fa-firstdraft' />
         </Link>
@@ -35,37 +21,33 @@ function Navbar() {
         </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <li className='nav-item'>
-            <Link to='/home' className='nav-links' onClick={closeMobileMenu}>
-              Home
+            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+              I am a Customer
             </Link>
           </li>
           <li className='nav-item'>
             <Link
-              to='/search'
+              to='/seller'
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Search
+              I am a Seller
             </Link>
           </li>
           <li className='nav-item'>
             <Link
-              to='/contact-us'
+              to='/admin'
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Contact Us
+              Admin
             </Link>
           </li>
-         
         </ul>
-        <Button variant="info" onClick={logout}>
-                        Logout
-                            </Button>
+       
       </nav>
-     
     </>
   );
 }
 
-export default Navbar;
+export default NavbarLogin;
