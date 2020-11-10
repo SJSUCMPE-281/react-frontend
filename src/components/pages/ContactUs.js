@@ -1,6 +1,11 @@
 import React from 'react';
 import '../../App.css';
-
+import Navbar from '../Navbar';
 export default function ContactUs() {
-  return <h1 className='contact-us'>CONTACT</h1>;
+  return (
+    <>
+    <Navbar />
+    <h1 className='contact-us'>CONTACT</h1>;
+    </>
+  )
 }
