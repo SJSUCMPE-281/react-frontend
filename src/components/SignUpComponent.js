@@ -9,7 +9,8 @@ import Alert from 'react-bootstrap/Alert';
 import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 //import { useHistory } from "react-router-dom";
 
-function SignUpComponent(){
+function SignUpComponent(props){
+    console.log(props.groupname);
     const [email, setEmail] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -28,12 +29,19 @@ function SignUpComponent(){
         Value: lastname,
       };
     
+      var datagroupName = {
+        Name: "custom:groupname",
+        Value: props.groupname,
+      };
+
       var attributeList = [];
       var attributeFirstName = new CognitoUserAttribute(dataFirstName);
       var attributeLastName = new CognitoUserAttribute(dataLastName);
+      var attributeGroupName = new CognitoUserAttribute(datagroupName);
     
       attributeList.push(attributeFirstName);
       attributeList.push(attributeLastName);
+      attributeList.push(attributeGroupName);
       //let history = useHistory();
      
     const onSubmit = event => {

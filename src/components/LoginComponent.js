@@ -60,7 +60,7 @@ function LoginComponent(props){
             
             {signup ? 
             <div><div>
-            <SignUpComponent />
+            <SignUpComponent groupname={props.user}/>
             <Container>
             <p onClick={showLogin}>Back to Login screen</p>
             </Container>
