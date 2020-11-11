@@ -20,11 +20,13 @@ function SignUpComponent(props){
 
 
     var dataFirstName = {
+        // change custom:firstName to custom:firstname before code merge
         Name: "custom:firstname",
         Value: firstname,
       };
     
       var dataLastName = {
+        // change custom:lastName to custom:lastname before code merge
         Name: "custom:lastname",
         Value: lastname,
       };
