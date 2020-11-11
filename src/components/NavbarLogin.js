@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NavbarLogin.css';
 
-function NavbarLogin() {
+function NavbarLogin(props) {
+  console.log(props.user);
   const [click, setClick] = useState(false);
-
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
 
   return (
     <>
@@ -21,7 +22,9 @@ function NavbarLogin() {
         </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <li className='nav-item'>
-            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+            <Link to='/customer' className='nav-links' 
+            style={{ backgroundColor: props.user==="CustomerGroup" ? 'blue' : '#1A171B' }}
+            onClick={closeMobileMenu}>
               I am a Customer
             </Link>
           </li>
@@ -29,6 +32,7 @@ function NavbarLogin() {
             <Link
               to='/seller'
               className='nav-links'
+              style={{ backgroundColor: props.user==="SellerGroup" ? 'blue' : '#1A171B' }}
               onClick={closeMobileMenu}
             >
               I am a Seller
@@ -38,6 +42,7 @@ function NavbarLogin() {
             <Link
               to='/admin'
               className='nav-links'
+              style={{ backgroundColor: props.user==="AdminGroup" ? 'blue' : '#1A171B' }}
               onClick={closeMobileMenu}
             >
               Admin

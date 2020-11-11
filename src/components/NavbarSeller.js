@@ -19,8 +19,9 @@ function NavbarSeller() {
       console.log("user exits");
         user.signOut();
         localStorage.removeItem("cartItems");
-        history.push("/");
+        
     }
+    history.push("/");
 }
 
   return (
