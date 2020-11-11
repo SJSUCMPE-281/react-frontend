@@ -9,9 +9,11 @@ import AdminLogin from './components/AdminLogin';
 import SellerLogin from './components/SellerLogin';
 import { Account } from './components/Accounts';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import SellerHomePage from './components/SellerHomePage';
-import { Provider } from "react-redux"
-import store from "./store"
+import { Provider } from "react-redux";
+import store from "./store";
+import SellerProfile from './components/SellerProfile';
+import CreateProduct from './components/CreateProduct';
+import ListProducts from './components/ListProducts';
 
 function App() {
   return (
@@ -28,7 +30,11 @@ function App() {
         <Route path='/search' component={Search} />
         <Route path='/contact-us' component={ContactUs} />
 
-        <Route path='/sellerhome' component={SellerHomePage} />
+        <Route path='/sellerhome' component={ListProducts} />
+        <Route path = "/listproducts" exact component = {ListProducts}></Route>
+        <Route path = "/addproduct/:id" exact component = {CreateProduct}></Route>
+        <Route path = "/sellerprofile" exact component = {SellerProfile}></Route>
+
       </Switch>
       </Account>
     </Router>
