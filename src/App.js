@@ -14,6 +14,8 @@ import store from "./store";
 import SellerProfile from './components/SellerProfile';
 import CreateProduct from './components/CreateProduct';
 import ListProducts from './components/ListProducts';
+import MainHome from './components/MainHome';
+
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
        <Account>
     
       <Switch>
-        <Route path='/' exact component={CustomerLogin} />
+        <Route path='/' exact component={MainHome} />
+        <Route path='/customer' exact component={CustomerLogin} />
         <Route path='/admin' component={AdminLogin} />
         <Route path='/seller' component={SellerLogin} />
 

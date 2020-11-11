@@ -76,7 +76,7 @@ function LoginComponent(props){
                         </Row>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <Form.Control type="email" placeholder="Enter email" value={email}
+                                <Form.Control required type="email" placeholder="Enter email" value={email}
                                     onChange={event => setEmail(event.target.value)} /></Col>
                         </Row>
                     </Form.Group>
@@ -86,7 +86,7 @@ function LoginComponent(props){
                             <Col md={{ span: 6, offset: 3 }}><Form.Label>Password</Form.Label></Col>
                         </Row>
                         <Row>
-                            <Col md={{ span: 6, offset: 3 }}><Form.Control type="password" placeholder="Password" value={password}
+                            <Col md={{ span: 6, offset: 3 }}><Form.Control required type="password" placeholder="Password" value={password}
                                 onChange={event => setPassword(event.target.value)} /></Col>
                         </Row>
                     </Form.Group>

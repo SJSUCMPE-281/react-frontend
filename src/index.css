@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 html {
-  font-size: 60%;
+  font-size: 65%;
   box-sizing: border-box important;
 }
 body,
@@ -100,6 +100,7 @@ footer {
   /*width:50px;
   height: 50px;*/
 }
+
 .product-price {
   display: flex;
   justify-content: space-between;
@@ -261,4 +262,31 @@ th {
 
 .center{
   text-align: center;
+}
+.left{
+  text-align: left;
+}
+.right{
+  text-align: right;
+}
+.middle{
+  padding-top: 5%;
+}
+
+.margin{
+  margin-top: 5px;
+}
+
+.imagesize {
+  max-height: 15rem;
+  /*width:50px;
+  height: 50px;*/
+}
+.width{
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.card-title {
+  color:goldenrod;
 }
