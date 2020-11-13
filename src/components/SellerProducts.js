@@ -20,6 +20,9 @@ export default class SellerProducts extends Component {
   closeModal = () => {
       this.setState({product:null}) ;
   }
+  editProduct= (product) => {
+    this.props.history.push(`/addproduct/${product._id}`);
+  }
   
   render() {
       const {product} = this.state;
@@ -35,9 +38,8 @@ export default class SellerProducts extends Component {
                           <p>{product.title}</p>
                         
                       </a>
-                      <span>
-                     <span className="widthhalf">
-                     <ReactStars
+                      
+                      <ReactStars
                               count={5}
                               size={20}
                               edit = {false}
@@ -45,8 +47,7 @@ export default class SellerProducts extends Component {
                               activeColor= "yellow"
                               value={product.rating}
                               
-                          /></span>(2)</span>
-                     
+                          />
                       <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                       <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit Product</button>

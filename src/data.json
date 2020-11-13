@@ -82,5 +82,30 @@
         "rating":5
        }
        
-    ]
+    ],
+
+    "productCategory":[
+        {"_id":"shoes1",
+         "category": "Home"
+        },
+        {"_id":"shoes1",
+         "category": "Kitchen"
+        },
+        {"_id":"shoes1",
+         "category": "Bath"
+        },
+        {"_id":"shoes1",
+         "category": "Home Decor"
+        }
+        
+     ],
+     "sellerProfile":[
+      {
+       "userId":"simpsons",
+       "firstName": "Homer",
+       "lastName" : "Simpson",
+       "email": "homer@sympson.com",
+       "address": "SpringField"
+      }
+   ]
 }
