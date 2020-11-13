@@ -19,6 +19,10 @@ function Navbar() {
       console.log("user exits");
         user.signOut();
         localStorage.removeItem("cartItems");
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        localStorage.removeItem("firstname");
+        localStorage.removeItem("lastname");
        
     }
     history.push("/");
@@ -42,20 +46,20 @@ function Navbar() {
           </li>
           <li className='nav-item'>
             <Link
-              to='/search'
-              className='nav-links'
-              onClick={closeMobileMenu}
-            >
-              Search
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link
               to='/contact-us'
               className='nav-links'
               onClick={closeMobileMenu}
             >
               Contact Us
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <Link
+              to='/myProfile'
+              className='nav-links'
+              onClick={closeMobileMenu}
+            >
+              My Profile
             </Link>
           </li>
          

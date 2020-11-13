@@ -31,11 +31,12 @@ function LoginComponent(props){
         
         authenticate(email, password).then(
             data => {
+                localStorage.setItem("email",email);
+                localStorage.setItem("password",password);
                 console.log("logged in!",data);
+                localStorage.setItem("firstname",data.idToken.payload["custom:firstname"]);
+                localStorage.setItem("lastname",data.idToken.payload["custom:lastname"]);
                 var user_id=data.accessToken.payload.username;
-                console.log(user_id);
-                console.log(data.accessToken.payload["cognito:groups"][0]);
-                //history.push(`/dashboard/${user_id}`);
                 let group = data.accessToken.payload["cognito:groups"][0];
                 if(group === props.user){
                     if(group === "CustomerGroup"){

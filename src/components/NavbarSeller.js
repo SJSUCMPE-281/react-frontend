@@ -19,6 +19,10 @@ function NavbarSeller() {
       console.log("user exits");
         user.signOut();
         localStorage.removeItem("cartItems");
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        localStorage.removeItem("firstname");
+        localStorage.removeItem("lastname");
         
     }
     history.push("/");

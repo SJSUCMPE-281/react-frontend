@@ -17,6 +17,10 @@ class Home extends React.Component{
       sort: ""
     };
   }
+  handleClick = () => {
+    console.log(this.state.toggleMenu);
+    this.setState({toggleMenu: !this.state.toggleMenu});
+  }
   filterProducts = (event) => {
     console.log(event.target.value);
     if(event.target.value === ""){
@@ -37,10 +41,28 @@ class Home extends React.Component{
   }
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice();
+
+    var existingItems = cartItems.filter(x=>x._id !== product._id);
+    var item = cartItems.filter(x=>x._id === product._id);
+    
+    if(item[0].count>1){
+      item[0].count--;
+      var newArray = [];
+      newArray.push(...existingItems);
+      newArray.push(...item);
+      console.log(newArray);
+      this.setState({cartItems: newArray});
+      localStorage.setItem(
+        "cartItems",
+        JSON.stringify(newArray));
+    }
+   else{
     this.setState({cartItems: cartItems.filter(x=>x._id !== product._id)});
     localStorage.setItem(
       "cartItems",
       JSON.stringify(cartItems.filter(x=>x._id !== product._id)));
+   }
+
   }
   addToCart = (product) => {
     const cartItems = this.state.cartItems.slice();
