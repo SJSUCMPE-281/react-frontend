@@ -35,7 +35,8 @@ export default class Product extends Component {
                           <p>{product.title}</p>
                         
                       </a>
-                      
+                      <span>
+                     <span className="widthhalf">
                       <ReactStars
                               count={5}
                               size={20}
@@ -44,7 +45,7 @@ export default class Product extends Component {
                               activeColor= "yellow"
                               value={product.rating}
                               
-                          />
+                          /></span>(2)</span>
                       <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                       <button onClick={() =>this.props.addToCart(product)} className="button primary">Add To Cart</button>

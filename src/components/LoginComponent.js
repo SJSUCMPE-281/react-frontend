@@ -32,10 +32,6 @@ function LoginComponent(props){
         authenticate(email, password).then(
             data => {
                 console.log("logged in!",data);
-                var user_id=data.accessToken.payload.username;
-                console.log(user_id);
-                console.log(data.accessToken.payload["cognito:groups"][0]);
-                //history.push(`/dashboard/${user_id}`);
                 let group = data.accessToken.payload["cognito:groups"][0];
                 if(group === props.user){
                     if(group === "CustomerGroup"){
