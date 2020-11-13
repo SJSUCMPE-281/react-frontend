@@ -1,22 +1,30 @@
-import React, { useState, useContext, useEffect }from 'react';
+import React, { useState,}from 'react';
 import Navbar from './Navbar';
 import OrdersPlaced from './OrdersPlaced';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import { AccountContext } from './Accounts';
+import Pool from '../UserPool';
 
 function CustomerProfile() {
-    const { authenticate } = useContext(AccountContext);
     const [profile, setProfile] = useState(true);
     const [sideBar, setSideBar] = useState(false);
-    let email = localStorage.getItem("email");
-    let password = localStorage.getItem("password");
-    console.log(email,password);
-    let firstname = localStorage.getItem("firstname");
-    let lastname = localStorage.getItem("lastname");
+    let email = '';
+    let firstname = '';
+    let lastname ='';
 
+    const user = Pool.getCurrentUser();
+    if (user) {
+        user.getSession((err, session) => {
+          if (!err) {
+            console.log(session);
+            email=session.getIdToken().payload["email"];
+            firstname=session.getIdToken().payload["custom:firstname"];
+            lastname=session.getIdToken().payload["custom:lastname"];
+          } 
+        });
+      } 
     
     const showOrders = () => {
         setProfile(false);
