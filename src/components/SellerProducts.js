@@ -35,8 +35,9 @@ export default class SellerProducts extends Component {
                           <p>{product.title}</p>
                         
                       </a>
-                      
-                      <ReactStars
+                      <span>
+                     <span className="widthhalf">
+                     <ReactStars
                               count={5}
                               size={20}
                               edit = {false}
@@ -44,7 +45,8 @@ export default class SellerProducts extends Component {
                               activeColor= "yellow"
                               value={product.rating}
                               
-                          />
+                          /></span>(2)</span>
+                     
                       <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                       <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit Product</button>
