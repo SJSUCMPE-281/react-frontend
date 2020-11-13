@@ -163,7 +163,6 @@ class CreateProduct extends Component {
                                             <label> Category </label>
                                             <select name="category" className="form-control" >
                                             {data.productCategory.map (product => (
-                                            //this.props.products.map(product => (
                                             <option value = ""> {product.category} </option>
                                             ))} 
                                             </select>
