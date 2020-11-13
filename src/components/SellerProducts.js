@@ -49,7 +49,8 @@ export default class SellerProducts extends Component {
                      
                       <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
-                      <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit Product</button>
+                      <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit</button>
+                      <button className="button primary" onClick={() =>this.props.deleteProduct(product)}>Delete</button>
                       </div>
                       </div>
                       </li>
@@ -73,8 +74,13 @@ export default class SellerProducts extends Component {
                                     this.props.editProduct(product);
                                     this.closeModal();
                                 }}
-                                >Edit Product</button>
-                                 
+                                >Edit</button>
+                                <button className="button primary"
+                                  onClick={()=>{
+                                    this.props.deleteProduct(product);
+                                    this.closeModal();
+                                }}
+                                >Delete</button>
                               </div>
                           </div>
                      </div>

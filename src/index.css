@@ -112,6 +112,7 @@ footer {
 }
 .button.primary {
   background-color: #f0c040;
+  margin-right:3px;
 }
 
 .filter {
