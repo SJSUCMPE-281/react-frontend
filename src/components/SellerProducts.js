@@ -4,6 +4,8 @@ import Fade from 'react-reveal/Fade';
 import Modal from 'react-modal';
 import Zoom from 'react-reveal/Zoom';
 import ReactStars from "react-rating-stars-component";
+import ListGroup from 'react-bootstrap/ListGroup';
+import Alert from 'react-bootstrap/Alert';
 
 export default class SellerProducts extends Component {
   constructor(props){
@@ -49,7 +51,8 @@ export default class SellerProducts extends Component {
                      
                       <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
-                      <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit Product</button>
+                      <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit</button>
+                      <button className="button primary" onClick={() =>this.props.deleteProduct(product)}>Delete</button>
                       </div>
                       </div>
                       </li>
@@ -73,9 +76,39 @@ export default class SellerProducts extends Component {
                                     this.props.editProduct(product);
                                     this.closeModal();
                                 }}
-                                >Edit Product</button>
-                                 
+                                >Edit</button>
+                                <button className="button primary"
+                                  onClick={()=>{
+                                    this.props.deleteProduct(product);
+                                    this.closeModal();
+                                }}
+                                >Delete</button>
                               </div>
+                              <hr />
+                              <h1 className="center">Reviews</h1>
+                              <hr />
+                              {product.reviews.length === 0 ? (
+                <div >No one has reviewed the prodcut yet!</div>
+                )
+                :
+                (
+                    <ListGroup >
+                              {product.reviews.map((review,index) => (
+                                  
+                                   <ListGroup.Item key={index}><h2>{review.name}</h2><ReactStars
+                                   count={5}
+                                   size={20}
+                                   edit = {false}
+                                   color= "gray"
+                                   activeColor= "yellow"
+                                   value={review.rating}
+                                   
+                               /><Alert variant="dark">
+                                       {review.review}
+                                   </Alert></ListGroup.Item>
+              ))}
+                </ListGroup>
+                )} 
                           </div>
                      </div>
                   </Zoom> </Modal>}
