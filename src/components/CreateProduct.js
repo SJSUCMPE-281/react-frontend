@@ -123,32 +123,32 @@ class CreateProduct extends Component {
                                     <form>
                                         <div className = "form-group">
                                             <label> Product Id </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Product Id" name="productId" className="form-control" 
                                                 value={this.state._id} onChange={this.changeProductIdHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label>Product Title </label>
-                                            <input placeholder="Last Name" name="lastName" className="form-control" 
+                                            <input placeholder="Product Title" name="productTitle" className="form-control" 
                                                 value={this.state.title} onChange={this.changeProductTitleHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label>Product Description </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
+                                            <input placeholder="Product Description" name="productDescription" className="form-control" 
                                                 value={this.state.description} onChange={this.changeProductDescHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Product Price </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Product Price" name="productPrice" className="form-control" 
                                                 value={this.state.price} onChange={this.changeProductPriceHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Category </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Category" name="category" className="form-control" 
                                                 value={this.state.category} onChange={this.changeProductCategoryHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Image </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Image" name="image" className="form-control" 
                                                 value={this.state.image} onChange={this.changeProductImageHandler}/>
                                         </div>
 
