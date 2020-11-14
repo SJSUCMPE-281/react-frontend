@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NavbarSeller from './NavbarSeller';
 import data from '../data.json';
 
+
 class CreateProduct extends Component {
     constructor(props) {
         super(props)
@@ -14,8 +15,6 @@ class CreateProduct extends Component {
             price:'',
             category:'',
             image:'',
-
-
            id: this.props.match.params.id
         }
         console.log("id",this.state.id);
@@ -32,7 +31,15 @@ class CreateProduct extends Component {
 
           
             if(this.state.id === '_add'){
+
                 return
+                /*let productCategory1 = data.productCategory.filter((productCategory) => productCategory._id === this.state.id);
+                console.log(productCategory1);
+                this.setState({
+                    _id: productCategory1[0]._id,
+                    category:productCategory1[0].category,
+                })
+                console.log('product category => ' + JSON.stringify(productCategory1 ));*/
             }else{
 
                 /* Fetch the products details from database with the product Id and set the state with the result set */
@@ -49,9 +56,8 @@ class CreateProduct extends Component {
                     image:product[0].image,
 
                 })
-            }        
+            }       
         }
-
     saveOrUpdateProduct = (e) => {
         e.preventDefault();
         let product = {
@@ -108,7 +114,19 @@ class CreateProduct extends Component {
         }
        
     }
+    getFile(){
+    
+        if(this.state.id === '_add'){
+            return <><label> Choose Image </label> <input type="file" name="productImage" className="form-control" 
+            value={this.state.image} onChange={this.changeProductImageHandler}/></>
+        }else{
+            return <><label> Current Image ({this.state.image}) </label> <input type="file" name="productImage" className="form-control" 
+             onChange={this.changeProductImageHandler}/></>
+        }
+       
+    }
     render() {
+        
         return (
             <div>
                   <NavbarSeller />
@@ -123,33 +141,37 @@ class CreateProduct extends Component {
                                     <form>
                                         <div className = "form-group">
                                             <label> Product Id </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Product Id" name="firstName" className="form-control" 
                                                 value={this.state._id} onChange={this.changeProductIdHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label>Product Title </label>
-                                            <input placeholder="Last Name" name="lastName" className="form-control" 
+                                            <input placeholder="Product Title" name="productTitle" className="form-control" 
                                                 value={this.state.title} onChange={this.changeProductTitleHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label>Product Description </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
+                                            <input placeholder="Product Description" name="productDescription" className="form-control" 
                                                 value={this.state.description} onChange={this.changeProductDescHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Product Price </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
+                                            <input placeholder="Product Price" name="productPrice" className="form-control" 
                                                 value={this.state.price} onChange={this.changeProductPriceHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Category </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
-                                                value={this.state.category} onChange={this.changeProductCategoryHandler}/>
+                                            <select name="category" className="form-control" >
+                                            {data.productCategory.map (product => (
+                                            //this.props.products.map(product => (
+                                            <option value = ""> {product.category} </option>
+                                            ))} 
+                                            </select>
                                         </div>
                                         <div className = "form-group">
-                                            <label> Image </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
-                                                value={this.state.image} onChange={this.changeProductImageHandler}/>
+                                            {
+                                    this.getFile()
+                                }
                                         </div>
 
                                         <button className="btn btn-success" onClick={this.saveOrUpdateProduct}>Save</button>
@@ -165,4 +187,4 @@ class CreateProduct extends Component {
     }
 }
 
-export default CreateProduct
+export default CreateProduct;
