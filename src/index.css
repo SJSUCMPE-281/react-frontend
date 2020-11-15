@@ -70,7 +70,7 @@ footer {
 }
 .products li {
   flex: 0 1 29rem;
-  height: 46rem;
+  height: 39rem;
   padding: 1rem;
 }
 .product {
@@ -80,8 +80,8 @@ footer {
   justify-content: space-between;
   height: 100%;
   padding:5px;
-  border:solid lightgrey 2px;
-  border-radius: 25px;
+  border-bottom:solid lightgrey 2px;
+ 
  
 }
 .product img {
@@ -116,7 +116,6 @@ footer {
 .button.primary {
   background-color: #f0c040;
   margin-right:3px;
-  border-radius: 15px;
 }
 
 .filter {
@@ -410,4 +409,7 @@ li {
 .widthhalf{
   width:95px;
   float:left;
+}
+.carouselWidth{
+  width: 70rem;
 }
