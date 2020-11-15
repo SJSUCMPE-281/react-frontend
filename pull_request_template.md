@@ -1,12 +1,12 @@
-Description of new feature implemented in this PR
+<Description of new feature implemented in this PR>
 
 ## Changes
 
-- Description of changes
+- <Description of changes>
 
 ## Screenshots
 
-(prefer animated gif)
+<(prefer animated gif)>
 
 ## Checklist
 
