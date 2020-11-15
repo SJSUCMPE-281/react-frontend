@@ -6,6 +6,7 @@ import Zoom from 'react-reveal/Zoom';
 import ReactStars from "react-rating-stars-component";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Alert from 'react-bootstrap/Alert';
+import Carousel from 'react-bootstrap/Carousel'
 
 export default class Product extends Component {
   constructor(props){
@@ -33,7 +34,7 @@ export default class Product extends Component {
                   <li key={product._id}>
                       <div className="product">
                       <a href={"#" + product._id} onClick={()=> this.openModal(product)}>
-                          <img src={product.image} alt={product.title}></img>
+                          <img src={product.image[0].link} alt={product.title}></img>
                           <p>{product.title}</p>
                         
                       </a>
@@ -61,7 +62,19 @@ export default class Product extends Component {
                  <Zoom>
                      <button className="close-modal" onClick={this.closeModal}>x</button>
                      <div className="product-details">
-                         <img src={product.image} alt={product.title}></img>
+                         <div className="carouselWidth">
+                     <Carousel>
+                     {product.image.map((pic,index) => (
+                        <Carousel.Item key={index}>
+                        <img
+                        className="d-block w-100"
+                        src={pic.link}
+                        alt=""
+                        />
+                        </Carousel.Item>
+                    ))}
+                    </Carousel>
+                    </div>    
                          <div className="product-details-description">
                              <p>
                               <strong>{product.title}</strong>
