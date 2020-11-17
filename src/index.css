@@ -57,7 +57,6 @@ footer {
   flex: 1 20rem;
 }
 
-
 /* products */
 .products {
   display: flex;
@@ -79,13 +78,14 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
- 
+  padding: 5px;
+  border-top: 1px solid lightgrey;
 }
 .product img {
-  max-width: 37rem;
-  max-height: 30rem;
-  /*width:50px;
-  height: 50px;*/
+  /* max-width: 37rem;
+  max-height: 30rem; */
+  width: 260px;
+  height: 250px;
 }
 
 .product-price {
@@ -112,6 +112,8 @@ footer {
 }
 .button.primary {
   background-color: #f0c040;
+  /*margin-right: 3px;*/
+  border-radius: 15px;
 }
 
 .filter {
@@ -124,7 +126,6 @@ footer {
 .filter div {
   flex: 1;
 }
-
 
 .cart {
   padding: 1rem;
@@ -168,7 +169,6 @@ footer {
   flex: 1;
 }
 
-
 form {
   width: 100%;
 }
@@ -186,7 +186,6 @@ input {
   padding: 1rem;
   border: 0.1rem #c0c0c0 solid;
 }
-
 
 .product-details {
   display: flex;
@@ -247,20 +246,20 @@ th {
   text-align: left;
 }
 
-.center{
+.center {
   text-align: center;
 }
-.left{
+.left {
   text-align: left;
 }
-.right{
+.right {
   text-align: right;
 }
-.middle{
+.middle {
   padding-top: 5%;
 }
 
-.margin{
+.margin {
   margin-top: 5px;
 }
 
@@ -269,13 +268,13 @@ th {
   /*width:50px;
   height: 50px;*/
 }
-.width{
+.width {
   padding-left: 150px;
   padding-right: 150px;
 }
 
 .card-title {
-  color:goldenrod;
+  color: goldenrod;
 }
 
 ul {
@@ -333,26 +332,26 @@ li {
   width: 100%;
   height: 2px;
   margin-bottom: 4px;
-  background-color:black;
+  background-color: black;
   border-radius: 5px;
   transition: all 0.3s cubic-bezier(1, 0.13, 0.35, 1.09);
 }
-.navToggle.open span{
-  background:orange;
+.navToggle.open span {
+  background: orange;
 }
 
 .navToggle span:last-child {
   margin-bottom: 0;
 }
-.wrapper{
-  z-index:-1;
-  position:fixed;
-  height:100vh;
+.wrapper {
+  z-index: -1;
+  position: fixed;
+  height: 100vh;
   background: white;
-  width:100%;
-  left:0;
-  right:0;
-  bottom:0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .mainNav {
   position: absolute;
@@ -360,7 +359,7 @@ li {
   right: 0;
   width: 200px;
   height: 100vh;
-  background-color:gray;
+  background-color: gray;
   padding: 58px 15px;
   z-index: 3;
   transform: translateX(100%);
@@ -392,17 +391,16 @@ li {
   height: 120%;
 }
 
-.nav-item{
+.nav-item {
   cursor: pointer;
-
 }
-.profile-details{
-  width:500px;
-  height:500px;
-  margin-left:200px;
-  margin-top:50px;
+.profile-details {
+  width: 500px;
+  height: 500px;
+  margin-left: 200px;
+  margin-top: 50px;
 }
-.widthhalf{
-  width:95px;
-  float:left;
+.widthhalf {
+  width: 95px;
+  float: left;
 }

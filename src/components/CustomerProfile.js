@@ -20,8 +20,8 @@ function CustomerProfile() {
           if (!err) {
             console.log(session);
             email=session.getIdToken().payload["email"];
-            firstname=session.getIdToken().payload["custom:firstname"];
-            lastname=session.getIdToken().payload["custom:lastname"];
+            firstname=session.getIdToken().payload["custom:firstName"];
+            lastname=session.getIdToken().payload["custom:lastName"];
           } 
         });
       } 
