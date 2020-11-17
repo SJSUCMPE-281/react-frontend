@@ -10,7 +10,7 @@ export const saveMedia = (files) => async (dispatch) => {
   }
 
   const res = await axios.post(
-    "http://marketplaceseller-env.eba-ygz48yhg.us-east-1.elasticbeanstalk.com/api/media",
+    process.env.REACT_APP_SELLER_URL + "/api/media",
     formData,
     {
       headers: {

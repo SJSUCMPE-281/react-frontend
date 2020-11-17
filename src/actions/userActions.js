@@ -3,7 +3,7 @@ import { GET_BUYER, GET_SELLER } from "./types";
 
 export const saveBuyer = (newBuyer) => async (dispatch) => {
   const res = await axios.post(
-    "http://marketplacebuyer-env.eba-mzeupjpj.us-east-1.elasticbeanstalk.com/api/buyer",
+    process.env.REACT_APP_BUYER_URL + "/api/buyer",
     newBuyer
   );
 
@@ -12,7 +12,7 @@ export const saveBuyer = (newBuyer) => async (dispatch) => {
 
 export const saveSeller = (newSeller) => async (dispatch) => {
   const res = await axios.post(
-    "http://marketplaceseller-env.eba-ygz48yhg.us-east-1.elasticbeanstalk.com/api/seller",
+    process.env.REACT_APP_SELLER_URL + "/api/seller",
     newSeller
   );
   dispatch({ type: GET_SELLER, payload: res.data });
@@ -20,7 +20,7 @@ export const saveSeller = (newSeller) => async (dispatch) => {
 
 export const getSeller = (id) => async (dispatch) => {
   const res = await axios.get(
-    `http://marketplaceseller-env.eba-ygz48yhg.us-east-1.elasticbeanstalk.com/api/seller/${id}`
+    process.env.REACT_APP_SELLER_URL + `/api/seller/${id}`
   );
   dispatch({ type: GET_SELLER, payload: res.data });
 };

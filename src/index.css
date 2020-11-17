@@ -69,7 +69,7 @@ footer {
 }
 .products li {
   flex: 0 1 29rem;
-  height: 46rem;
+  height: 39rem;
   padding: 1rem;
 }
 .product {
@@ -79,11 +79,11 @@ footer {
   justify-content: space-between;
   height: 100%;
   padding: 5px;
-  border-top: 1px solid lightgrey;
+  border-bottom: solid lightgrey 1px;
 }
 .product img {
-  /* max-width: 37rem;
-  max-height: 30rem; */
+  /*max-width: 37rem;
+  max-height: 30rem;*/
   width: 260px;
   height: 250px;
 }
@@ -102,7 +102,7 @@ footer {
   font-size: 3rem;
 }
 .button {
-  padding: 1rem;
+  /* padding: 1rem; */
   border: 0.1rem #c0c0c0 solid;
   background-color: #f0f0f0;
   cursor: pointer;
@@ -112,8 +112,7 @@ footer {
 }
 .button.primary {
   background-color: #f0c040;
-  /*margin-right: 3px;*/
-  border-radius: 15px;
+  margin-right: 3px;
 }
 
 .filter {
@@ -403,4 +402,7 @@ li {
 .widthhalf {
   width: 95px;
   float: left;
+}
+.carouselWidth {
+  width: 70rem;
 }

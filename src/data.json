@@ -6,8 +6,9 @@
         "price": 21,
         "availableSizes": ["X", "L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes1.jpg",
-        "rating":3
+        "image": [{"link":"/images/shoes1.jpg"},{"link":"/images/shoes2.jpg"},{"link":"/images/shoes3.jpg"},{"link":"/images/shoes4.jpg"}],
+        "rating":3,
+        "reviews":[{"name":"Akash","review":"too good","rating":1},{"name":"Mathew","review":"too bad","rating":1}]
        },
        {"_id":"shoes2",
         "title": "shoes2",
@@ -15,8 +16,9 @@
         "price": 20,
         "availableSizes": ["X", "L"],
         "category":"shoes",
-        "image": "/images/shoes2.jpg",
-        "rating":3
+        "image": [{"link":"/images/shoes2.jpg"}],
+        "rating":3,
+        "reviews":[{"name":"John","review":"too good","rating":1},{"name":"Honai","review":"too bad. Cannot use","rating":1}]
        },
        {"_id":"shoes3",
         "title": "shoes3",
@@ -24,8 +26,9 @@
         "price": 23,
         "availableSizes": ["L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes3.jpg",
-        "rating":3
+        "image": [{"link":"/images/shoes3.jpg"}],
+        "rating":3,
+        "reviews":[{"name":"Biden","review":"too good","rating":1}]
        },
        {"_id":"shoes4",
         "title": "shoes4",
@@ -33,8 +36,9 @@
         "price": 27,
         "availableSizes": ["X", "L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes4.jpg",
-        "rating":4
+        "image": [{"link":"/images/shoes4.jpg"}],
+        "rating":4,
+        "reviews":[{"name":"Joe","review":"too good","rating":1},{"name":"Donald","review":"too bad","rating":2},{"name":"Obama","review":"nice product","rating":1}]
        },
        {"_id":"shoes5",
         "title": "shoes5",
@@ -42,8 +46,10 @@
         "price": 25,
         "availableSizes": ["X", "L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes5.jpg",
-        "rating":2
+        "image": [{"link":"/images/shoes5.jpg"}],
+        "rating":2,
+        "reviews":[]
+        
        },
        {"_id":"shoes6",
         "title": "shoes6",
@@ -51,8 +57,9 @@
         "price": 20,
         "availableSizes": ["X", "L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes6.jpg",
-        "rating":5
+        "image": [{"link":"/images/shoes6.jpg"}],
+        "rating":5,
+        "reviews":[{"name":"Joe","review":"too good","rating":1},{"name":"Donald","review":"too bad","rating":1},{"name":"Obama","review":"nice product","rating":1}]
        },
        {"_id":"shoes7",
         "title": "shoes7",
@@ -60,8 +67,9 @@
         "price": 20,
         "availableSizes": ["X", "L", "XL"],
         "category":"shoes",
-        "image": "/images/shoes7.jpg",
-        "rating":3
+        "image": [{"link":"/images/shoes7.jpg"}],
+        "rating":3,
+        "reviews":[{"name":"Joe","review":"too good","rating":1},{"name":"Donald","review":"too bad","rating":1},{"name":"Obama","review":"nice product","rating":1}]
        },
        {"_id":"salt",
         "title": "salt",
@@ -69,8 +77,9 @@
         "price": 10,
         "availableSizes": ["X", "L", "XL"],
         "category":"food",
-        "image": "/images/salt.jpg",
-        "rating":1
+        "image": [{"link":"/images/salt.jpg"}],
+        "rating":1,
+        "reviews":[{"name":"Joe","review":"too good","rating":1},{"name":"Donald","review":"too bad","rating":1},{"name":"Obama","review":"nice product","rating":1}]
        },
        {"_id":"sugar",
         "title": "sugar",
@@ -78,8 +87,9 @@
         "price": 15,
         "availableSizes": ["X", "L", "XL"],
         "category":"food",
-        "image": "/images/sugar.jpg",
-        "rating":5
+        "image": [{"link":"/images/sugar.jpg"}],
+        "rating":5,
+        "reviews":[{"name":"Joe","review":"too good","rating":1},{"name":"Donald","review":"too bad","rating":1},{"name":"Obama","review":"nice product","rating":1}]
        }
        
     ]

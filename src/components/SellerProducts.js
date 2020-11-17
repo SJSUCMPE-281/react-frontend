@@ -9,6 +9,8 @@ import { getSellerProducts } from "../actions/sellerProductActions";
 import { getSeller } from "../actions/userActions";
 import SellerShopRegister from "./SellerShopRegister";
 import Pool from "../UserPool";
+import ListGroup from "react-bootstrap/ListGroup";
+import Alert from "react-bootstrap/Alert";
 
 class SellerProducts extends Component {
   constructor(props) {
@@ -85,7 +87,13 @@ class SellerProducts extends Component {
                         className="button primary"
                         onClick={() => this.props.editProduct(product)}
                       >
-                        Edit Product
+                        Edit
+                      </button>
+                      <button
+                        className="button primary"
+                        onClick={() => this.props.deleteProduct(product)}
+                      >
+                        Delete
                       </button>
                     </div>
                   </div>
@@ -115,9 +123,41 @@ class SellerProducts extends Component {
                           this.closeModal();
                         }}
                       >
-                        Edit Product
+                        Edit
+                      </button>
+                      <button
+                        className="button primary"
+                        onClick={() => {
+                          this.props.deleteProduct(product);
+                          this.closeModal();
+                        }}
+                      >
+                        Delete
                       </button>
                     </div>
+                    <hr />
+                    <h1 className="center">Reviews</h1>
+                    <hr />
+                    {product.reviews.length === 0 ? (
+                      <div>No one has reviewed the prodcut yet!</div>
+                    ) : (
+                      <ListGroup>
+                        {product.reviews.map((review, index) => (
+                          <ListGroup.Item key={index}>
+                            <h2>{review.name}</h2>
+                            <ReactStars
+                              count={5}
+                              size={20}
+                              edit={false}
+                              color="gray"
+                              activeColor="yellow"
+                              value={review.rating}
+                            />
+                            <Alert variant="dark">{review.review}</Alert>
+                          </ListGroup.Item>
+                        ))}
+                      </ListGroup>
+                    )}
                   </div>
                 </div>
               </Zoom>{" "}

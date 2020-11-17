@@ -3,7 +3,7 @@ import { GET_CART, DELETE_CART } from "./types";
 
 export const saveCart = (id, cart) => async (dispatch) => {
   const res = await axios.post(
-    `http://marketplacebuyer-env.eba-mzeupjpj.us-east-1.elasticbeanstalk.com/api/${id}/cart`,
+    process.env.REACT_APP_BUYER_URL + `/api/${id}/cart`,
     cart
   );
 
@@ -12,14 +12,14 @@ export const saveCart = (id, cart) => async (dispatch) => {
 
 export const getCart = (id) => async (dispatch) => {
   const res = await axios.get(
-    `http://marketplacebuyer-env.eba-mzeupjpj.us-east-1.elasticbeanstalk.com/api/${id}/cart`
+    process.env.REACT_APP_BUYER_URL + `/api/${id}/cart`
   );
   dispatch({ type: GET_CART, payload: res.data });
 };
 
 export const deleteCart = (id) => async (dispatch) => {
   const res = await axios.delete(
-    `http://marketplacebuyer-env.eba-mzeupjpj.us-east-1.elasticbeanstalk.com/api/${id}/cart`
+    process.env.REACT_APP_BUYER_URL + `/api/${id}/cart`
   );
   console.log("inside get delete", res);
   dispatch({ type: DELETE_CART, payload: res.data });

@@ -22,6 +22,11 @@ class ListProducts extends Component {
         this.props.history.push(`/addproduct/${product._id}`);
     }
 
+    deleteProduct = (product) => {
+      /*axios to delete the product by passing the product Id and also update the state with remaining products */
+      this.setState({products: this.state.products.filter(prod => prod._id !== product._id)});
+    }
+
     render() {
         return (
             <>
@@ -30,7 +35,7 @@ class ListProducts extends Component {
         <main>
           <div className="content">
             <div className="main">
-              <SellerProducts products={this.state.products} editProduct={this.editProduct}> </SellerProducts>
+              <SellerProducts products={this.state.products} editProduct={this.editProduct} deleteProduct={this.deleteProduct}> </SellerProducts>
               </div>
             <div className="sidebar"> 
              </div>
