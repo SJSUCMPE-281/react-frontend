@@ -15,8 +15,10 @@ class CreateProduct extends Component {
       price: "",
       category: "",
       image: "",
+      categoryList: ["Shoes","Accessories","Clothes","Food"],
 
       id: this.props.match.params.id,
+
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -90,11 +92,12 @@ class CreateProduct extends Component {
     const files = event.target.files;
     this.props.saveMedia(files);
   };
+  
 
   cancel() {
     this.props.history.push("/listproducts");
   }
-
+ 
   getTitle() {
     if (this.state.id === "_add") {
       return <h3 className="text-center">Add Product</h3>;
@@ -127,8 +130,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label>Product Title </label>
                     <input
-                      placeholder="Last Name"
-                      name="lastName"
+                      placeholder="Product Title"
+                      name="productTitle"
                       className="form-control"
                       value={this.state.title}
                       onChange={this.changeProductTitleHandler}
@@ -137,8 +140,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label>Product Description </label>
                     <input
-                      placeholder="Email Address"
-                      name="emailId"
+                      placeholder="Product Description"
+                      name="productDescription"
                       className="form-control"
                       value={this.state.description}
                       onChange={this.changeProductDescHandler}
@@ -147,8 +150,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label> Product Price </label>
                     <input
-                      placeholder="First Name"
-                      name="firstName"
+                      placeholder="Product Price"
+                      name="productPrice"
                       className="form-control"
                       value={this.state.price}
                       onChange={this.changeProductPriceHandler}
@@ -156,13 +159,12 @@ class CreateProduct extends Component {
                   </div>
                   <div className="form-group">
                     <label> Category </label>
-                    <input
-                      placeholder="First Name"
-                      name="firstName"
-                      className="form-control"
-                      value={this.state.category}
-                      onChange={this.changeProductCategoryHandler}
-                    />
+                    <select name="category" className="form-control" onChange={this.changeProductCategoryHandler}>
+                    <option value = ""> Please choose a category </option>
+                    {this.state.categoryList.map((cat) => {
+                      return <option value = {cat}> {cat} </option>
+                    })}
+                    </select>
                   </div>
                   <div className="form-group upload-steps">
                     <label> Image </label>
