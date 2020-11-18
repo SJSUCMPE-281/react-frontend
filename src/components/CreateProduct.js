@@ -18,6 +18,18 @@ class CreateProduct extends Component {
       price: "",
       category: "",
       image: "",
+      categoryList: [
+        "Fashion",
+        "Food & Grocery",
+        "Toys & Kids",
+        "Electronics",
+        "Books",
+        "Home,Garden & Tools",
+        "Pet Supplies",
+        "Computers",
+        "Beauty & Health",
+        "Sports",
+      ],
 
       id: this.props.match.params.id,
     };
@@ -42,19 +54,19 @@ class CreateProduct extends Component {
       return;
     } else {
       /* Fetch the products details from database with the product Id and set the state with the result set */
-
-      let product = data.products.filter(
-        (product) => product._id === this.state.id
-      );
-      console.log(product);
-      this.setState({
-        _id: product[0]._id,
-        title: product[0].title,
-        description: product[0].description,
-        price: product[0].price,
-        category: product[0].category,
-        image: product[0].image,
-      });
+      console.log(this.state.id);
+      // let product = data.products.filter(
+      //   (product) => product._id === this.state.id
+      // );
+      // console.log(product);
+      // this.setState({
+      //   _id: product[0]._id,
+      //   title: product[0].title,
+      //   description: product[0].description,
+      //   price: product[0].price,
+      //   category: product[0].category,
+      //   image: product[0].image,
+      // });
     }
   }
 
@@ -152,8 +164,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label>Product Title </label>
                     <input
-                      placeholder="Last Name"
-                      name="lastName"
+                      placeholder="Product Title"
+                      name="productTitle"
                       className="form-control"
                       value={this.state.title}
                       onChange={this.changeProductTitleHandler}
@@ -162,8 +174,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label>Product Description </label>
                     <input
-                      placeholder="Email Address"
-                      name="emailId"
+                      placeholder="Product Description"
+                      name="productDescription"
                       className="form-control"
                       value={this.state.description}
                       onChange={this.changeProductDescHandler}
@@ -172,8 +184,8 @@ class CreateProduct extends Component {
                   <div className="form-group">
                     <label> Product Price </label>
                     <input
-                      placeholder="First Name"
-                      name="firstName"
+                      placeholder="Product Price"
+                      name="productPrice"
                       className="form-control"
                       value={this.state.price}
                       onChange={this.changeProductPriceHandler}
@@ -181,13 +193,16 @@ class CreateProduct extends Component {
                   </div>
                   <div className="form-group">
                     <label> Category </label>
-                    <input
-                      placeholder="First Name"
-                      name="firstName"
+                    <select
+                      name="category"
                       className="form-control"
-                      value={this.state.category}
                       onChange={this.changeProductCategoryHandler}
-                    />
+                    >
+                      <option value=""> Please choose a category </option>
+                      {this.state.categoryList.map((cat) => {
+                        return <option value={cat}> {cat} </option>;
+                      })}
+                    </select>
                   </div>
                   <div className="form-group upload-steps">
                     <label> Image </label>

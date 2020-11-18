@@ -11,7 +11,9 @@ import SellerShopRegister from "./SellerShopRegister";
 import Pool from "../UserPool";
 import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
-import { getProduct } from "../actions/productActions";
+import { getProduct, getReviews } from "../actions/productActions";
+import Carousel from "react-bootstrap/Carousel";
+import { withRouter } from "react-router-dom";
 
 class SellerProducts extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class SellerProducts extends Component {
       product: null,
       rating: null,
       userState: {},
+      reviews: [],
     };
   }
   async openModal(product) {
@@ -48,10 +51,14 @@ class SellerProducts extends Component {
     }
   }
 
+  editProduct = (product) => {
+    this.props.history.push(`/addproduct/${product.productId}`);
+  };
+
   renderShop() {
     const { sellerProducts } = this.props.sellerProducts;
     console.log("seller prod", sellerProducts);
-    console.log(this.state.userState.shopName);
+    console.log(this.state.product);
     if (this.state.userState.shopName === null) {
       return (
         <div>
@@ -61,7 +68,9 @@ class SellerProducts extends Component {
     }
     if (this.state.userState.shopName !== null && sellerProducts.length > 0) {
       console.log(this.state.userState.shopName);
-      const { product } = this.state;
+      const { product, reviews } = this.state;
+      console.log(this.props.reviews.reviews);
+      console.log(reviews);
       return (
         <div>
           <Fade bottom cascade>
@@ -85,8 +94,9 @@ class SellerProducts extends Component {
                           count={5}
                           size={18}
                           edit={false}
+                          isHalf={true}
                           color="gray"
-                          activeColor="yellow"
+                          activeColor="#f5b942"
                           value={product.rating}
                         />
                       </span>
@@ -97,7 +107,7 @@ class SellerProducts extends Component {
                       <div>{formatCurrency(product.price)}</div>
                       <button
                         className="button primary"
-                        onClick={() => this.props.editProduct(product)}
+                        onClick={() => this.editProduct(product)}
                       >
                         Edit
                       </button>
@@ -120,18 +130,26 @@ class SellerProducts extends Component {
                   x
                 </button>
                 <div className="product-details">
-                  <img src={product.image} alt={product.title}></img>
+                  <div className="carouselWidth">
+                    <Carousel>
+                      {product.mediaList.map((pic) => (
+                        <Carousel.Item key={pic.mediaId}>
+                          <img className="d-block w-100" src={pic.url} alt="" />
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+                  </div>
                   <div className="product-details-description">
                     <p>
-                      <strong>{product.title}</strong>
+                      <strong>{product.productName}</strong>
                     </p>
-                    <p>{product.description}</p>
+                    <p>{product.productDescription}</p>
                     <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                       <button
                         className="button primary"
                         onClick={() => {
-                          this.props.editProduct(product);
+                          this.editProduct(product);
                           this.closeModal();
                         }}
                       >
@@ -150,19 +168,20 @@ class SellerProducts extends Component {
                     <hr />
                     <h1 className="center">Reviews</h1>
                     <hr />
-                    {product.reviews.length === 0 ? (
-                      <div>No one has reviewed the prodcut yet!</div>
+                    {reviews.length === 0 ? (
+                      <div>No one has reviewed the product yet!</div>
                     ) : (
                       <ListGroup>
-                        {product.reviews.map((review, index) => (
-                          <ListGroup.Item key={index}>
-                            <h2>{review.name}</h2>
+                        {reviews.map((review) => (
+                          <ListGroup.Item key={review.reviewId}>
+                            <h2>{review.buyerName}</h2>
                             <ReactStars
                               count={5}
-                              size={20}
+                              size={18}
                               edit={false}
+                              isHalf={true}
                               color="gray"
-                              activeColor="yellow"
+                              activeColor="#f5b942"
                               value={review.rating}
                             />
                             <Alert variant="dark">{review.review}</Alert>
@@ -190,11 +209,12 @@ class SellerProducts extends Component {
     );
   }
 }
-function mapStateToProps({ sellerProducts, user }) {
-  return { sellerProducts, user };
+function mapStateToProps({ sellerProducts, user, reviews, products }) {
+  return { sellerProducts, user, reviews, products };
 }
 export default connect(mapStateToProps, {
   getSellerProducts,
   getSeller,
   getProduct,
-})(SellerProducts);
+  getReviews,
+})(withRouter(SellerProducts));

@@ -16,10 +16,6 @@ class ListProducts extends Component {
     /*Axios to fetch the products of this seller should come here. Store the result in the state */
   }
 
-  editProduct = (product) => {
-    this.props.history.push(`/addproduct/${product._id}`);
-  };
-
   deleteProduct = (product) => {
     /*axios to delete the product by passing the product Id and also update the state with remaining products */
     this.setState({
