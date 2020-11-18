@@ -3,6 +3,9 @@ import NavbarSeller from "./NavbarSeller";
 import data from "../data.json";
 import { connect } from "react-redux";
 import { saveMedia } from "../actions/mediaActions";
+import { getSeller } from "../actions/userActions";
+import { saveSellerProduct } from "../actions/sellerProductActions";
+import Pool from "../UserPool";
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -15,10 +18,20 @@ class CreateProduct extends Component {
       price: "",
       category: "",
       image: "",
-      categoryList: ["Shoes","Accessories","Clothes","Food"],
+      categoryList: [
+        "Fashion",
+        "Food & Grocery",
+        "Toys & Kids",
+        "Electronics",
+        "Books",
+        "Home,Garden & Tools",
+        "Pet Supplies",
+        "Computers",
+        "Beauty & Health",
+        "Sports",
+      ],
 
       id: this.props.match.params.id,
-
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -32,23 +45,28 @@ class CreateProduct extends Component {
   }
 
   componentDidMount() {
+    const user = Pool.getCurrentUser();
+    if (user) {
+      const userId = user.getUsername();
+      this.props.getSeller(userId);
+    }
     if (this.state.id === "_add") {
       return;
     } else {
       /* Fetch the products details from database with the product Id and set the state with the result set */
-
-      let product = data.products.filter(
-        (product) => product._id === this.state.id
-      );
-      console.log(product);
-      this.setState({
-        _id: product[0]._id,
-        title: product[0].title,
-        description: product[0].description,
-        price: product[0].price,
-        category: product[0].category,
-        image: product[0].image,
-      });
+      console.log(this.state.id);
+      // let product = data.products.filter(
+      //   (product) => product._id === this.state.id
+      // );
+      // console.log(product);
+      // this.setState({
+      //   _id: product[0]._id,
+      //   title: product[0].title,
+      //   description: product[0].description,
+      //   price: product[0].price,
+      //   category: product[0].category,
+      //   image: product[0].image,
+      // });
     }
   }
 
@@ -68,7 +86,23 @@ class CreateProduct extends Component {
     // step 5
     if (this.state.id === "_add") {
       /* Add axios to save the new product here*/
-      this.props.history.push("/listproducts");
+      const { images } = this.props.images;
+      const user = Pool.getCurrentUser();
+      if (user) {
+        const userId = user.getUsername();
+        let newProduct = {
+          productName: this.state.title,
+          productDescription: this.state.description,
+          price: this.state.price,
+          category: this.state.category,
+          sellerId: this.props.user.seller.sellerId,
+          shopName: this.props.user.seller.shopName,
+          mediaList: [...images],
+        };
+        console.log(newProduct);
+        this.props.saveSellerProduct(userId, newProduct);
+        this.props.history.push("/sellerproducts");
+      }
     } else {
       /* Add axios to update the product here*/
       this.props.history.push("/listproducts");
@@ -92,12 +126,11 @@ class CreateProduct extends Component {
     const files = event.target.files;
     this.props.saveMedia(files);
   };
-  
 
   cancel() {
     this.props.history.push("/listproducts");
   }
- 
+
   getTitle() {
     if (this.state.id === "_add") {
       return <h3 className="text-center">Add Product</h3>;
@@ -117,6 +150,7 @@ class CreateProduct extends Component {
   }
   render() {
     console.log(this.props.images);
+    console.log(this.props.user);
     return (
       <div>
         <NavbarSeller />
@@ -159,11 +193,15 @@ class CreateProduct extends Component {
                   </div>
                   <div className="form-group">
                     <label> Category </label>
-                    <select name="category" className="form-control" onChange={this.changeProductCategoryHandler}>
-                    <option value = ""> Please choose a category </option>
-                    {this.state.categoryList.map((cat) => {
-                      return <option value = {cat}> {cat} </option>
-                    })}
+                    <select
+                      name="category"
+                      className="form-control"
+                      onChange={this.changeProductCategoryHandler}
+                    >
+                      <option value=""> Please choose a category </option>
+                      {this.state.categoryList.map((cat) => {
+                        return <option value={cat}> {cat} </option>;
+                      })}
                     </select>
                   </div>
                   <div className="form-group upload-steps">
@@ -202,8 +240,12 @@ class CreateProduct extends Component {
     );
   }
 }
-function mapStateToProps({ images }) {
-  return { images };
+function mapStateToProps({ images, user }) {
+  return { images, user };
 }
 
-export default connect(mapStateToProps, { saveMedia })(CreateProduct);
+export default connect(mapStateToProps, {
+  saveMedia,
+  getSeller,
+  saveSellerProduct,
+})(CreateProduct);
