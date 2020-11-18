@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import data from "../data.json";
 import NavbarSeller from "./NavbarSeller";
 import SellerProducts from "./SellerProducts";
+import { getSeller } from "../actions/userActions";
+import Pool from "../UserPool";
+import { connect } from "react-redux";
+import Container from 'react-bootstrap/Container';
+import Fade from "react-reveal/Fade";
 
 class ListProducts extends Component {
   constructor(props) {
@@ -9,13 +14,17 @@ class ListProducts extends Component {
 
     this.state = {
       products: data.products,
+      userState:{}
     };
   }
-
-  componentDidMount() {
-    /*Axios to fetch the products of this seller should come here. Store the result in the state */
+  async componentDidMount() {
+    const user = Pool.getCurrentUser();
+    if (user) {
+      const id = user.getUsername();
+      const response = await this.props.getSeller(id);
+      this.setState({ userState: this.props.user.seller });
+    }
   }
-
   deleteProduct = (product) => {
     /*axios to delete the product by passing the product Id and also update the state with remaining products */
     this.setState({
@@ -27,9 +36,29 @@ class ListProducts extends Component {
     return (
       <>
         <NavbarSeller />
+        <img className="banner" src="../images/banner1.jpg" />
+        <Fade bottom cascade>
+        <Container>
+          <br />
+        <h1>{this.state.userState.shopName} </h1>
+        <div>
+          <div className="leftDiv">
+          <p>{this.state.userState.shopDescription} </p>
+          </div>
+          <div className="rightDiv">
+            <h2>  {this.state.userState.firstName}{" "}{this.state.userState.lastName}</h2>
+            <p className="gray">Shop Owner</p>
+            <p>Contact : {this.state.userState.phoneNumber}</p>
+            <p>E-mail : {this.state.userState.email}</p>
+          </div>
+          </div>
+        </Container>
+        </Fade>
         <div className="grid-container">
           <main>
+        
             <div className="content">
+              
               <div className="main">
                 <SellerProducts
                   editProduct={this.editProduct}
@@ -38,7 +67,6 @@ class ListProducts extends Component {
                   {" "}
                 </SellerProducts>
               </div>
-              <div className="sidebar"></div>
             </div>
           </main>
         </div>
@@ -46,5 +74,10 @@ class ListProducts extends Component {
     );
   }
 }
+function mapStateToProps({user}) {
+  return {user};
+}
+export default connect(mapStateToProps, {
+  getSeller
+})(ListProducts);
 
-export default ListProducts;
