@@ -11,6 +11,7 @@ import SellerShopRegister from "./SellerShopRegister";
 import Pool from "../UserPool";
 import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
+import { getProduct } from "../actions/productActions";
 
 class SellerProducts extends Component {
   constructor(props) {
@@ -21,9 +22,17 @@ class SellerProducts extends Component {
       userState: {},
     };
   }
-  openModal = (product) => {
-    this.setState({ product });
-  };
+  async openModal(product) {
+    const resp = await this.props.getProduct(
+      product.sellerId,
+      product.productId
+    );
+    this.setState({
+      product: this.props.products.product,
+    });
+    const data = await this.props.getReviews(product.productId);
+    this.setState({ reviews: this.props.reviews.reviews });
+  }
 
   closeModal = () => {
     this.setState({ product: null });
@@ -42,43 +51,46 @@ class SellerProducts extends Component {
   renderShop() {
     const { sellerProducts } = this.props.sellerProducts;
     console.log("seller prod", sellerProducts);
+    console.log(this.state.userState.shopName);
     if (this.state.userState.shopName === null) {
       return (
         <div>
           <SellerShopRegister />
         </div>
       );
-    } else if (
-      this.state.userState.shopName !== null &&
-      this.props.sellerProducts.length > 0
-    ) {
+    }
+    if (this.state.userState.shopName !== null && sellerProducts.length > 0) {
+      console.log(this.state.userState.shopName);
       const { product } = this.state;
       return (
         <div>
           <Fade bottom cascade>
             <ul className="products">
-              {this.props.sellerProducts.map((product) => (
-                <li key={product._id}>
+              {sellerProducts.map((product) => (
+                <li key={product.productId}>
                   <div className="product">
                     <a
-                      href={"#" + product._id}
+                      href={"#" + product.productId}
                       onClick={() => this.openModal(product)}
                     >
-                      <img src={product.image} alt={product.title}></img>
-                      <p>{product.title}</p>
+                      <img
+                        src={product.mediaList[0].url}
+                        alt={product.productName}
+                      ></img>
+                      <p>{product.productName}</p>
                     </a>
                     <span>
                       <span className="widthhalf">
                         <ReactStars
                           count={5}
-                          size={20}
+                          size={18}
                           edit={false}
                           color="gray"
                           activeColor="yellow"
                           value={product.rating}
                         />
                       </span>
-                      (2)
+                      ({product.reviewCount})
                     </span>
 
                     <div className="product-price">
@@ -181,6 +193,8 @@ class SellerProducts extends Component {
 function mapStateToProps({ sellerProducts, user }) {
   return { sellerProducts, user };
 }
-export default connect(mapStateToProps, { getSellerProducts, getSeller })(
-  SellerProducts
-);
+export default connect(mapStateToProps, {
+  getSellerProducts,
+  getSeller,
+  getProduct,
+})(SellerProducts);

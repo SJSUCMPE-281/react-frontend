@@ -16,6 +16,7 @@ import ListProducts from "./components/ListProducts";
 import MainHome from "./components/MainHome";
 import OrdersPlaced from "./components/OrdersPlaced";
 import CustomerProfile from "./components/CustomerProfile";
+import SellerProducts from "./components/SellerProducts";
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
             <Route path="/contact-us" component={ContactUs} />
             <Route path="/sellerhome" component={ListProducts} />
             <Route path="/listproducts" exact component={ListProducts}></Route>
+            <Route
+              path="/sellerproducts"
+              exact
+              component={SellerProducts}
+            ></Route>
             <Route
               path="/addproduct/:id"
               exact

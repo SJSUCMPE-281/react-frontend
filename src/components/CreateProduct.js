@@ -3,6 +3,9 @@ import NavbarSeller from "./NavbarSeller";
 import data from "../data.json";
 import { connect } from "react-redux";
 import { saveMedia } from "../actions/mediaActions";
+import { getSeller } from "../actions/userActions";
+import { saveSellerProduct } from "../actions/sellerProductActions";
+import Pool from "../UserPool";
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -30,6 +33,11 @@ class CreateProduct extends Component {
   }
 
   componentDidMount() {
+    const user = Pool.getCurrentUser();
+    if (user) {
+      const userId = user.getUsername();
+      this.props.getSeller(userId);
+    }
     if (this.state.id === "_add") {
       return;
     } else {
@@ -66,7 +74,23 @@ class CreateProduct extends Component {
     // step 5
     if (this.state.id === "_add") {
       /* Add axios to save the new product here*/
-      this.props.history.push("/listproducts");
+      const { images } = this.props.images;
+      const user = Pool.getCurrentUser();
+      if (user) {
+        const userId = user.getUsername();
+        let newProduct = {
+          productName: this.state.title,
+          productDescription: this.state.description,
+          price: this.state.price,
+          category: this.state.category,
+          sellerId: this.props.user.seller.sellerId,
+          shopName: this.props.user.seller.shopName,
+          mediaList: [...images],
+        };
+        console.log(newProduct);
+        this.props.saveSellerProduct(userId, newProduct);
+        this.props.history.push("/sellerproducts");
+      }
     } else {
       /* Add axios to update the product here*/
       this.props.history.push("/listproducts");
@@ -114,6 +138,7 @@ class CreateProduct extends Component {
   }
   render() {
     console.log(this.props.images);
+    console.log(this.props.user);
     return (
       <div>
         <NavbarSeller />
@@ -200,8 +225,12 @@ class CreateProduct extends Component {
     );
   }
 }
-function mapStateToProps({ images }) {
-  return { images };
+function mapStateToProps({ images, user }) {
+  return { images, user };
 }
 
-export default connect(mapStateToProps, { saveMedia })(CreateProduct);
+export default connect(mapStateToProps, {
+  saveMedia,
+  getSeller,
+  saveSellerProduct,
+})(CreateProduct);
