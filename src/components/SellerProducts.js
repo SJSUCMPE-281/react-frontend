@@ -11,6 +11,7 @@ import SellerShopRegister from "./SellerShopRegister";
 import Pool from "../UserPool";
 import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
+import Carousel from "react-bootstrap/Carousel";
 
 class SellerProducts extends Component {
   constructor(props) {
@@ -56,113 +57,102 @@ class SellerProducts extends Component {
       return (
         <div>
           <Fade bottom cascade>
-            <ul className="products">
-              {this.props.sellerProducts.map((product) => (
-                <li key={product._id}>
-                  <div className="product">
-                    <a
-                      href={"#" + product._id}
-                      onClick={() => this.openModal(product)}
-                    >
-                      <img src={product.image} alt={product.title}></img>
-                      <p>{product.title}</p>
-                    </a>
-                    <span>
-                      <span className="widthhalf">
-                        <ReactStars
-                          count={5}
-                          size={20}
-                          edit={false}
-                          color="gray"
-                          activeColor="yellow"
-                          value={product.rating}
-                        />
-                      </span>
-                      (2)
-                    </span>
-
-                    <div className="product-price">
-                      <div>{formatCurrency(product.price)}</div>
-                      <button
-                        className="button primary"
-                        onClick={() => this.props.editProduct(product)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="button primary"
-                        onClick={() => this.props.deleteProduct(product)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Fade>
-          {product && (
-            <Modal isOpen={true} onRequestClose={this.closeModal}>
-              <Zoom>
-                <button className="close-modal" onClick={this.closeModal}>
-                  x
-                </button>
-                <div className="product-details">
-                  <img src={product.image} alt={product.title}></img>
-                  <div className="product-details-description">
-                    <p>
-                      <strong>{product.title}</strong>
-                    </p>
-                    <p>{product.description}</p>
-                    <div className="product-price">
-                      <div>{formatCurrency(product.price)}</div>
-                      <button
-                        className="button primary"
-                        onClick={() => {
-                          this.props.editProduct(product);
-                          this.closeModal();
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="button primary"
-                        onClick={() => {
-                          this.props.deleteProduct(product);
-                          this.closeModal();
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    <hr />
-                    <h1 className="center">Reviews</h1>
-                    <hr />
-                    {product.reviews.length === 0 ? (
-                      <div>No one has reviewed the prodcut yet!</div>
-                    ) : (
-                      <ListGroup>
-                        {product.reviews.map((review, index) => (
-                          <ListGroup.Item key={index}>
-                            <h2>{review.name}</h2>
-                            <ReactStars
+              <ul className="products">
+              {this.props.sellerProducts.map(product => (
+                  <li key={product._id}>
+                      <div className="product">
+                      <a href={"#" + product._id} onClick={()=> this.openModal(product)}>
+                      <img src={product.image[0].link} alt={product.title}></img>
+                          <p>{product.title}</p>
+                        
+                      </a>
+                      <span>
+                     <span className="widthhalf">
+                     <ReactStars
                               count={5}
                               size={20}
-                              edit={false}
-                              color="gray"
-                              activeColor="yellow"
-                              value={review.rating}
-                            />
-                            <Alert variant="dark">{review.review}</Alert>
-                          </ListGroup.Item>
-                        ))}
-                      </ListGroup>
-                    )}
-                  </div>
-                </div>
-              </Zoom>{" "}
-            </Modal>
-          )}
+                              edit = {false}
+                              color= "gray"
+                              activeColor= "yellow"
+                              value={product.rating}
+                              
+                          /></span>(2)</span>
+                     
+                      <div className="product-price">
+                      <div>{formatCurrency(product.price)}</div>
+                      <button className="button primary" onClick={() =>this.props.editProduct(product)}>Edit</button>
+                      <button className="button primary" onClick={() =>this.props.deleteProduct(product)}>Delete</button>
+                      </div>
+                      </div>
+                      </li>
+              ))}
+              </ul>
+              </Fade>
+              {product && <Modal isOpen={true} onRequestClose={this.closeModal}>
+                 <Zoom>
+                     <button className="close-modal" onClick={this.closeModal}>x</button>
+                     <div className="product-details">
+                     <div className="carouselWidth">
+                     <Carousel>
+                     {product.image.map((pic,index) => (
+                        <Carousel.Item key={index}>
+                        <img
+                        className="d-block w-100"
+                        src={pic.link}
+                        alt=""
+                        />
+                        </Carousel.Item>
+                    ))}
+                    </Carousel>
+                    </div>
+                         <div className="product-details-description">
+                             <p>
+                              <strong>{product.title}</strong>
+                              </p>
+                              <p>{product.description}</p>
+                              <div className="product-price">
+                                  <div>{formatCurrency(product.price)}</div>
+                                  <button className="button primary"
+                                  onClick={()=>{
+                                    this.props.editProduct(product);
+                                    this.closeModal();
+                                }}
+                                >Edit</button>
+                                <button className="button primary"
+                                  onClick={()=>{
+                                    this.props.deleteProduct(product);
+                                    this.closeModal();
+                                }}
+                                >Delete</button>
+                              </div>
+                              <hr />
+                              <h1 className="center">Reviews</h1>
+                              <hr />
+                              {product.reviews.length === 0 ? (
+                <div >No one has reviewed the prodcut yet!</div>
+                )
+                :
+                (
+                    <ListGroup >
+                              {product.reviews.map((review,index) => (
+                                  
+                                   <ListGroup.Item key={index}><h2>{review.name}</h2><ReactStars
+                                   count={5}
+                                   size={20}
+                                   edit = {false}
+                                   color= "gray"
+                                   activeColor= "yellow"
+                                   value={review.rating}
+                                   
+                               /><Alert variant="dark">
+                                       {review.review}
+                                   </Alert></ListGroup.Item>
+              ))}
+                </ListGroup>
+                )} 
+                          </div>
+                     </div>
+                  </Zoom>{" "} </Modal>}
         </div>
       );
     }
