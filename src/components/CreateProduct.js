@@ -101,12 +101,11 @@ class CreateProduct extends Component {
         };
         console.log(newProduct);
         this.props.saveSellerProduct(userId, newProduct);
-        this.props.history.push("/sellerproducts");
       }
     } else {
-      /* Add axios to update the product here*/
-      this.props.history.push("/listproducts");
+      /* Add axios to update the product here*/ 
     }
+    this.props.history.push("/listproducts");
   };
 
   changeProductTitleHandler = (event) => {

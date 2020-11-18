@@ -39,7 +39,7 @@ closeModal = () => {
   render() {
     return (
       <div className="profile-details">
-                 <Button variant="success"  onClick={this.registerShop}>
+                 <Button variant="success"  size="lg" block onClick={this.registerShop}>
                     REGISTER YOUR SHOP
                   </Button>
                   
