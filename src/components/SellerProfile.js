@@ -49,8 +49,8 @@ class SellerProfile extends Component {
           if (!err) {
             console.log(session);
             this.setState({email:session.getIdToken().payload["email"]})
-            this.setState({firstname:session.getIdToken().payload["custom:firstname"]})
-            this.setState({lastname:session.getIdToken().payload["custom:lastname"]})
+            this.setState({firstname:session.getIdToken().payload["custom:firstName"]})
+            this.setState({lastname:session.getIdToken().payload["custom:lastName"]})
             this.setState({uuid:session.getAccessToken().payload["username"]})
           } 
         });
