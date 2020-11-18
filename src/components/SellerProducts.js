@@ -67,12 +67,14 @@ class SellerProducts extends Component {
       );
     }
     if (this.state.userState.shopName !== null && sellerProducts.length > 0) {
-      console.log(this.state.userState.shopName);
+      console.log(this.state.userState);
       const { product, reviews } = this.state;
       console.log(this.props.reviews.reviews);
       console.log(reviews);
       return (
         <div>
+            <h1 className="center">Our Products</h1>
+              <hr />
           <Fade bottom cascade>
             <ul className="products">
               {sellerProducts.map((product) => (
