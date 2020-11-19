@@ -5,6 +5,9 @@ import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import ReactStars from "react-rating-stars-component";
 import { connect } from "react-redux";
+import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+
 import {
   getProducts,
   getProduct,
@@ -20,6 +23,8 @@ class Product extends Component {
     this.state = {
       product: null,
       reviews: [],
+      rating:'',
+      review:''
     };
   }
   async openModal(product) {
@@ -35,14 +40,22 @@ class Product extends Component {
   }
 
   closeModal = () => {
-    this.setState({ product: null });
+    this.setState({ product: null,rating: '',review:''});
   };
   componentDidMount() {
     this.props.getProducts();
   }
-
+  addReview = () => {
+    console.log(this.state);
+    this.closeModal();
+  }
   renderProductModal() {
     const { product, reviews } = this.state;
+    const ratingChanged = (newRating) => {
+      console.log(newRating);
+      this.setState({rating:newRating})
+      
+    };
     return (
       <div>
         {product && (
@@ -102,6 +115,26 @@ class Product extends Component {
                       ))}
                     </ListGroup>
                   )}
+                  <Form>
+                    <hr />
+                    <Form.Group controlId="review">
+                    <Form.Label>Add Your Review</Form.Label>
+                    <Form.Control type="text" placeholder="Enter review"  onChange={event => this.setState({review:event.target.value})}/>
+                  </Form.Group>
+                    <ReactStars
+                          count={5}
+                          size={18}
+                          edit={true}
+                          isHalf={false}
+                          color="gray"
+                          activeColor="#f5b942"
+                          value={0}
+                          onChange={ratingChanged}
+                        />
+                  <Button variant="warning" onClick={this.addReview}>
+                    Submit Your Review
+                  </Button>
+                </Form>
                 </div>
               </div>
             </Zoom>{" "}
