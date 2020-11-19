@@ -57,7 +57,8 @@ class Home extends React.Component {
     );
   };
   addToCart = (product) => {
-    let cart = {};
+    //const { cart } = this.props.cart;
+    let newCart = {};
     let orderDetail = {};
     const user = Pool.getCurrentUser();
     if (user) {
@@ -68,15 +69,15 @@ class Home extends React.Component {
           quantity: 1,
           orderDetailAmount: product.price,
         };
-        cart = {
+        newCart = {
           buyerId: id,
           orderDetails: [orderDetail],
         };
-        console.log(cart);
-        this.props.saveCart(id, cart);
+        console.log(newCart);
+        this.props.saveCart(id, newCart);
       } else {
         let alreadyInCart = false;
-        this.props.cart.forEach((item) => {
+        this.props.cart.orderDetails.forEach((item) => {
           if (item.product.productId === product.productId) {
             orderDetail = {
               ...item,
@@ -92,13 +93,13 @@ class Home extends React.Component {
             orderDetailAmount: product.price,
           };
         }
-        cart = {
+        newCart = {
           buyerId: id,
-          orderDetails: [...this.props.cart, orderDetail],
+          orderDetails: [...this.props.cart.orderDetails, orderDetail],
         };
 
-        console.log(cart);
-        this.props.saveCart(id, cart);
+        console.log(newCart);
+        this.props.saveCart(id, newCart);
       }
     }
   };
@@ -128,6 +129,7 @@ class Home extends React.Component {
     }));
   };
   render() {
+    // const { cart } = this.props.cart;
     console.log(this.props.cart);
     return (
       <>

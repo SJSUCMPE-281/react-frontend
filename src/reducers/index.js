@@ -5,6 +5,7 @@ import sellerProductReducer from "./sellerProductReducer";
 import userReducer from "./userReducer";
 import mediaReducer from "./mediaReducer";
 import reviewReducer from "./reviewReducer";
+import orderReducer from "./orderReducer";
 export default combineReducers({
   products: productReducer,
   cart: cartReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   user: userReducer,
   images: mediaReducer,
   reviews: reviewReducer,
+  orders: orderReducer,
 });
