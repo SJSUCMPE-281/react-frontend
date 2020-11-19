@@ -403,29 +403,34 @@ li {
   width: 95px;
   float: left;
 }
-.leftDiv{
-  width:500px;
-  justify-content:space-around;
+.leftDiv {
+  width: 500px;
+  justify-content: space-around;
   color: grey;
   display: inline-block;
 }
-.rightDiv{
+.rightDiv {
   display: inline-block;
-  margin-left:200px;
+  margin-left: 200px;
   border: solid gray 1px;
   border-radius: 5px;
-  padding:15px;
+  padding: 15px;
 }
 .carouselWidth {
   width: 70rem;
 }
-.carouselWidthHeight{
+.carouselWidthHeight {
   width: 90rem;
 }
-.banner{
-  width:100%;
-  height:250px;
+.banner {
+  width: 100%;
+  height: 250px;
 }
-.gray{
+.gray {
   color: grey;
+}
+
+img.ordertable {
+  height: 10%;
+  width: 10%;
 }
