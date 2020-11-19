@@ -16,7 +16,7 @@ import ListProducts from "./components/ListProducts";
 import MainHome from "./components/MainHome";
 import OrdersPlaced from "./components/OrdersPlaced";
 import CustomerProfile from "./components/CustomerProfile";
-
+import ShopView from './components/ShopView';
 function App() {
   return (
     <Provider store={store}>
@@ -29,6 +29,7 @@ function App() {
             <Route path="/seller" component={SellerLogin} />
             <Route path="/home" exact component={Home} />
             <Route path="/contact-us" component={ContactUs} />
+            <Route path="/shopview" component={ShopView} />
             <Route path="/sellerhome" component={ListProducts} />
             <Route path="/listproducts" exact component={ListProducts}></Route>
             <Route
