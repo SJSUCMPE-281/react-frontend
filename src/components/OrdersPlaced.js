@@ -5,6 +5,7 @@ import Zoom from "react-reveal/Zoom";
 import { connect } from "react-redux";
 import { getOrders } from "../actions/orderActions";
 import Pool from "../UserPool";
+import formatCurrency from "../util";
 
 class OrdersPlaced extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class OrdersPlaced extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.orders.orders.map((sale) => (
+                  {this.state.sales.map((sale) => (
                     <tr key={sale.orderId}>
                       <td> {sale.orderId}</td>
                       <td>
@@ -87,7 +88,7 @@ class OrdersPlaced extends Component {
                         <br></br>
                         {sale.address.zip}
                       </td>
-                      <td> {sale.totalAmount}</td>
+                      <td> {formatCurrency(sale.totalAmount)}</td>
                       <td> {sale.status}</td>
                       <td> {sale.trackingId} </td>
                       <td>{this.renderDate(sale.updatedAt)}</td>
@@ -138,22 +139,23 @@ class OrdersPlaced extends Component {
                               {order.product.productName}
                             </td>
                             <td> {order.quantity} </td>
-                            <td> {order.orderDetailAmount}</td>
+                            <td> {formatCurrency(order.orderDetailAmount)}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
                   <div className="center">
-                    Total Price: {this.state.sale.totalPrice}
+                    Total Price: {formatCurrency(this.state.sale.totalPrice)}
                   </div>
                   <br />
                   <div className="center">
-                    Tax Amount: {this.state.sale.taxAmount}
+                    Tax Amount: {formatCurrency(this.state.sale.taxAmount)}
                   </div>
                   <br />
                   <div className="center">
-                    Total Amount Paid: {this.state.sale.totalAmount}
+                    Total Amount Paid:{" "}
+                    {formatCurrency(this.state.sale.totalAmount)}
                   </div>
                 </Container>
               </div>
