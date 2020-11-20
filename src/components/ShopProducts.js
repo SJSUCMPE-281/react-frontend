@@ -121,18 +121,6 @@ class ShopProducts extends Component {
 
                     <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
-                      <button
-                        className="button primary"
-                        onClick={() => this.editProduct(product)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="button primary"
-                        onClick={() => this.props.deleteProduct(product)}
-                      >
-                        Delete
-                      </button>
                     </div>
                   </div>
                 </li>
