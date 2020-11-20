@@ -49,6 +49,7 @@ class SellerShopRegister extends Component {
     };
     console.log(newSeller);
     this.props.saveSeller(newSeller);
+    this.props.history.push(`/listproducts`);
   }
   changeProductImageHandler = (event) => {
     this.setState({ image: event.target.value });
