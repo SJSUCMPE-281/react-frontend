@@ -31,7 +31,7 @@ class StripeButton extends Component {
           totalPrice: cart.totalPrice,
           taxAmount: cart.taxAmount,
           totalAmount: cart.totalAmount,
-          trackingId: "1234",
+          sellerId: cart.orderDetails[0].product.sellerId,
           buyer: {
             buyerId: cart.buyerId,
           },
