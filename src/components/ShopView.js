@@ -29,8 +29,11 @@ class ShopView extends Component {
     return (
       <>
         <Navbar />
-        <img className="banner" src="../images/banner1.jpg" alt=""/>
-        <Fade bottom cascade>
+        {Object.keys(this.state.userState).length === 0 ?
+          <i className="fa fa-spinner fa-spin"></i> : <>
+           {this.state.userState.mediaList.length === 0 ? null : 
+            <img className="banner" src={this.state.userState.mediaList[0].url} />}
+        <Fade top cascade>
         <Container>
           <br />
         <h1>{this.state.userState.shopName} </h1>
@@ -47,6 +50,7 @@ class ShopView extends Component {
           </div>
         </Container>
         </Fade>
+          </>}       
         <div className="grid-container">
           <main>
         
