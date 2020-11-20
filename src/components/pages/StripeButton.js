@@ -3,6 +3,8 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { connect } from "react-redux";
 import { saveOrder } from "../../actions/orderActions";
+import { deleteCart } from "../../actions/cartActions";
+import Pool from "../../UserPool";
 
 class StripeButton extends Component {
   onToken = (stripePrice, cart) => (token) => {
@@ -35,6 +37,11 @@ class StripeButton extends Component {
         };
         console.log(newSale);
         this.props.saveOrder(newSale, cart.buyerId);
+        const user = Pool.getCurrentUser();
+        if (user) {
+          let userId = user.getUsername();
+          this.props.deleteCart(userId);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -61,4 +68,4 @@ class StripeButton extends Component {
   }
 }
 
-export default connect(null, { saveOrder })(StripeButton);
+export default connect(null, { saveOrder, deleteCart })(StripeButton);

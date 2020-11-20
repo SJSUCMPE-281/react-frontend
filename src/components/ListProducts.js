@@ -5,7 +5,7 @@ import SellerProducts from "./SellerProducts";
 import { getSeller } from "../actions/userActions";
 import Pool from "../UserPool";
 import { connect } from "react-redux";
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
 import Fade from "react-reveal/Fade";
 
 class ListProducts extends Component {
@@ -14,7 +14,7 @@ class ListProducts extends Component {
 
     this.state = {
       products: data.products,
-      userState:{}
+      userState: {},
     };
   }
   async componentDidMount() {
@@ -33,32 +33,35 @@ class ListProducts extends Component {
   };
 
   render() {
+    console.log(this.props.user);
     return (
       <>
         <NavbarSeller />
-        <img className="banner" src="../images/banner1.jpg" />
+        <img className="banner" src={this.props.user.seller.mediaList[0].url} />
         <Fade bottom cascade>
-        <Container>
-          <br />
-        <h1>{this.state.userState.shopName} </h1>
-        <div>
-          <div className="leftDiv">
-          <p>{this.state.userState.shopDescription} </p>
-          </div>
-          <div className="rightDiv">
-            <h2>  {this.state.userState.firstName}{" "}{this.state.userState.lastName}</h2>
-            <p className="gray">Shop Owner</p>
-            <p>Contact : {this.state.userState.phoneNumber}</p>
-            <p>E-mail : {this.state.userState.email}</p>
-          </div>
-          </div>
-        </Container>
+          <Container>
+            <br />
+            <h1>{this.state.userState.shopName} </h1>
+            <div>
+              <div className="leftDiv">
+                <p>{this.state.userState.shopDescription} </p>
+              </div>
+              <div className="rightDiv">
+                <h2>
+                  {" "}
+                  {this.state.userState.firstName}{" "}
+                  {this.state.userState.lastName}
+                </h2>
+                <p className="gray">Shop Owner</p>
+                <p>Contact : {this.state.userState.phoneNumber}</p>
+                <p>E-mail : {this.state.userState.email}</p>
+              </div>
+            </div>
+          </Container>
         </Fade>
         <div className="grid-container">
           <main>
-        
             <div className="content">
-              
               <div className="main">
                 <SellerProducts
                   editProduct={this.editProduct}
@@ -74,10 +77,9 @@ class ListProducts extends Component {
     );
   }
 }
-function mapStateToProps({user}) {
-  return {user};
+function mapStateToProps({ user }) {
+  return { user };
 }
 export default connect(mapStateToProps, {
-  getSeller
+  getSeller,
 })(ListProducts);
-
