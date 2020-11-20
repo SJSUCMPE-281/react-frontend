@@ -24,3 +24,12 @@ export const getReviews = (id) => async (dispatch) => {
   console.log(res);
   dispatch({ type: GET_REVIEWS, payload: res.data });
 };
+
+export const saveProductReview = (productId, newReview) => async (dispatch) => {
+  const res = await axios.post(
+    process.env.REACT_APP_SELLER_URL + `/api/product/${productId}/review`,
+    newReview
+  );
+  console.log(res);
+  dispatch({ type: GET_REVIEWS, payload: res.data });
+};
