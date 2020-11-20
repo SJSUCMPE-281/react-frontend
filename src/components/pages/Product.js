@@ -12,11 +12,12 @@ import {
   getProducts,
   getProduct,
   getReviews,
+  saveProductReview
 } from "../../actions/productActions";
 import ListGroup from "react-bootstrap/ListGroup";
 import Alert from "react-bootstrap/Alert";
 import Carousel from "react-bootstrap/Carousel";
-
+import Pool from '../../UserPool';
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +46,31 @@ class Product extends Component {
   componentDidMount() {
     this.props.getProducts();
   }
+  
   addReview = () => {
-    console.log(this.state);
     this.closeModal();
+      const user = Pool.getCurrentUser();
+      if (user) {
+        const userId = user.getUsername();
+          user.getSession((err, session) => {
+            if (!err) {
+              let firstname=session.getIdToken().payload["custom:firstName"];
+              let lastname=session.getIdToken().payload["custom:lastName"];
+
+              let newReview = {
+                buyerId: userId,
+                buyerName: firstname+" "+lastname,
+                product: this.state.product,
+                rating: this.state.rating,
+                review: this.state.review,
+              
+              }
+              let prodId = this.state.product.productId;
+              console.log(newReview);
+              this.props.saveProductReview(prodId, newReview);
+            } 
+          });
+        } 
   }
   renderProductModal() {
     const { product, reviews } = this.state;
@@ -204,4 +227,5 @@ export default connect(mapStateToProps, {
   getProducts,
   getProduct,
   getReviews,
+  saveProductReview
 })(Product);
