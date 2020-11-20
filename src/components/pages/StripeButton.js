@@ -27,6 +27,7 @@ class StripeButton extends Component {
             state: billing_details.address.state,
             zip: billing_details.address.postal_code,
           },
+          status: "ORDERED",
           totalPrice: cart.totalPrice,
           taxAmount: cart.taxAmount,
           totalAmount: cart.totalAmount,
