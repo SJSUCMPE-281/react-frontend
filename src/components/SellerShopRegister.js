@@ -129,7 +129,7 @@ class SellerShopRegister extends Component {
                         </button>
                         <button
                           className="btn btn-danger"
-                          //onClick={this.closeModal}
+                          onClick={this.closeModal}
                           style={{ marginLeft: "10px" }}
                         >
                           Cancel

@@ -22,6 +22,7 @@ class ListProducts extends Component {
     if (user) {
       const id = user.getUsername();
       const response = await this.props.getSeller(id);
+      console.log()
       this.setState({ userState: this.props.user.seller });
     }
   }
@@ -34,31 +35,42 @@ class ListProducts extends Component {
 
   render() {
     console.log(this.props.user);
+    console.log(this.state.userState);
     return (
       <>
         <NavbarSeller />
-        <img className="banner" src={this.props.user.seller.mediaList[0].url} />
-        <Fade bottom cascade>
-          <Container>
-            <br />
-            <h1>{this.state.userState.shopName} </h1>
-            <div>
-              <div className="leftDiv">
-                <p>{this.state.userState.shopDescription} </p>
-              </div>
-              <div className="rightDiv">
-                <h2>
-                  {" "}
-                  {this.state.userState.firstName}{" "}
-                  {this.state.userState.lastName}
-                </h2>
-                <p className="gray">Shop Owner</p>
-                <p>Contact : {this.state.userState.phoneNumber}</p>
-                <p>E-mail : {this.state.userState.email}</p>
-              </div>
-            </div>
-          </Container>
-        </Fade>
+        {Object.keys(this.state.userState).length === 0 ?
+          <i className="fa fa-spinner fa-spin"></i> : <>
+          {this.state.userState.shopName === null ? null :
+            (<> 
+            {this.state.userState.mediaList.length === 0 ? null : 
+            <img className="banner" src={this.props.user.seller.mediaList[0].url} />}
+             <Fade bottom cascade>
+               <Container>
+                 <br />
+                 <h1>{this.state.userState.shopName} </h1>
+                 <div>
+                   <div className="leftDiv">
+                     <p>{this.state.userState.shopDescription} </p>
+                   </div>
+                   <div className="rightDiv">
+                     <h2>
+                       {" "}
+                       {this.state.userState.firstName}{" "}
+                       {this.state.userState.lastName}
+                     </h2>
+                     <p className="gray">Shop Owner</p>
+                     <p>Contact : {this.state.userState.phoneNumber}</p>
+                     <p>E-mail : {this.state.userState.email}</p>
+                   </div>
+                 </div>
+               </Container>
+             </Fade></>)
+        }
+          </>
+      }
+        
+       
         <div className="grid-container">
           <main>
             <div className="content">
