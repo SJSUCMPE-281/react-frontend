@@ -145,6 +145,7 @@ class Product extends Component {
   }
   render() {
     const { products } = this.props.products;
+    console.log(products);
     return (
       <div>
         <Fade bottom cascade>
@@ -159,7 +160,7 @@ class Product extends Component {
                     <img src={product.imageUrl} alt={product.productName}></img>
                     <p>{product.productName}</p>
                   </a>
-                  <Link to='/shopview'>
+                  <Link to = {"/shopview/" + product.sellerId}>
                     <h5 className="text-muted">{product.shopName}</h5>
                   </Link>
                   <span>
