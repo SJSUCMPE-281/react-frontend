@@ -49,8 +49,9 @@ class SellerShopRegister extends Component {
     };
     console.log(newSeller);
     this.props.saveSeller(newSeller);
-    //this.props.history.push(`/listproducts`);
+    window.location.pathname = '/listproducts';
   }
+
   changeProductImageHandler = (event) => {
     this.setState({ image: event.target.value });
     const files = event.target.files;
