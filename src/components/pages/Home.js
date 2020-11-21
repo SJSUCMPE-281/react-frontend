@@ -7,7 +7,7 @@ import Cart from "./Cart";
 import Navbar from "../Navbar";
 import { connect } from "react-redux";
 import { getProducts } from "../../actions/productActions";
-import { getCart, saveCart } from "../../actions/cartActions";
+import { getCart, saveCart, deleteCart } from "../../actions/cartActions";
 import Pool from "../../UserPool";
 
 class Home extends React.Component {
@@ -78,28 +78,50 @@ class Home extends React.Component {
       } else {
         let alreadyInCart = false;
         this.props.cart.orderDetails.forEach((item) => {
-          if (item.product.productId === product.productId) {
-            orderDetail = {
-              ...item,
-              quantity: item.quantity,
-            };
-            alreadyInCart = true;
-          }
-        });
-        if (!alreadyInCart) {
-          orderDetail = {
-            product: product,
-            quantity: 1,
-            orderDetailAmount: product.price,
-          };
-        }
-        newCart = {
-          buyerId: id,
-          orderDetails: [...this.props.cart.orderDetails, orderDetail],
-        };
+          if(item.product.sellerId === product.sellerId){
+            if (item.product.productId === product.productId) {
+              orderDetail = {
+                ...item,
+                quantity: item.quantity,
+              };
+              alreadyInCart = true;
 
-        console.log(newCart);
-        this.props.saveCart(id, newCart);
+              newCart = {
+                buyerId: id,
+                orderDetails: [...this.props.cart.orderDetails, orderDetail],
+              };
+      
+              console.log(newCart);
+              this.props.saveCart(id, newCart);
+            }
+            if (!alreadyInCart) {
+              orderDetail = {
+                product: product,
+                quantity: 1,
+                orderDetailAmount: product.price,
+              };
+              newCart = {
+                buyerId: id,
+                orderDetails: [...this.props.cart.orderDetails, orderDetail],
+              };
+      
+              console.log(newCart);
+              this.props.saveCart(id, newCart);
+            }
+          }
+          else{
+            let choice = window.confirm("You can only order from a single Seller. Want to clear your cart and start filling again?");
+            if (choice === true) {
+              this.props.deleteCart(id);
+              
+            } else {
+              console.log("Dont Clear the cart")
+             
+            }
+          }
+         
+        });
+     
       }
     }
   };
@@ -165,4 +187,4 @@ function mapStateToProps({ products, cart }) {
   return { products, cart };
 }
 
-export default connect(mapStateToProps, { getCart, saveCart })(Home);
+export default connect(mapStateToProps, { getCart, saveCart, deleteCart })(Home);
