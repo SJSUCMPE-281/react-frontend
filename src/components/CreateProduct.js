@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import NavbarSeller from "./NavbarSeller";
-import data from "../data.json";
 import { connect } from "react-redux";
 import { saveMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
 import { saveSellerProduct } from "../actions/sellerProductActions";
 import Pool from "../UserPool";
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/Container";
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -32,6 +34,7 @@ class CreateProduct extends Component {
       ],
 
       id: this.props.match.params.id,
+      userState:{}
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -49,7 +52,9 @@ class CreateProduct extends Component {
     if (user) {
       const userId = user.getUsername();
       this.props.getSeller(userId);
+      this.setState({ userState: this.props.user.seller });
     }
+
     if (this.state.id === "_add") {
       return;
     } else {
@@ -154,7 +159,16 @@ class CreateProduct extends Component {
       <div>
         <NavbarSeller />
         <br></br>
-        <div className="container">
+        {Object.keys(this.state.userState).length === 0 ?
+          <i className="fa fa-spinner fa-spin"></i> :
+          <>
+          {this.state.userState.shopName === null ? (
+          <Container>
+            <Link to='/listproducts'>
+              <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
+            </Link>
+          </Container>) : <>
+            <div className="container">
           <div className="row">
             <div className="card col-md-6 offset-md-3 offset-md-3">
               {this.getTitle()}
@@ -235,6 +249,10 @@ class CreateProduct extends Component {
             </div>
           </div>
         </div>
+        </>}
+         
+          </>}
+      
       </div>
     );
   }
