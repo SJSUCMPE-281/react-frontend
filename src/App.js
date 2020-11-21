@@ -16,7 +16,8 @@ import ListProducts from "./components/ListProducts";
 import MainHome from "./components/MainHome";
 import OrdersPlaced from "./components/OrdersPlaced";
 import CustomerProfile from "./components/CustomerProfile";
-import ShopView from './components/ShopView';
+import ShopView from "./components/ShopView";
+import Orders from "./components/Orders";
 function App() {
   return (
     <Provider store={store}>
@@ -44,7 +45,8 @@ function App() {
             ></Route>
 
             <Route path="/myprofile" component={CustomerProfile} />
-            <Route path="/orders" component={OrdersPlaced} />
+            <Route path="/orders" exact component={OrdersPlaced} />
+            <Route path="/orders/:id" exact component={Orders}></Route>
           </Switch>
         </Account>
       </Router>
