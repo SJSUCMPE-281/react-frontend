@@ -35,7 +35,7 @@ function NavbarSeller() {
         <ul className={click ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
             <Link
-              to="/listproducts"
+              to="/orders/ORDERED"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -44,7 +44,7 @@ function NavbarSeller() {
           </li>
           <li className="nav-item">
             <Link
-              to="/listproducts"
+              to="/orders/SHIPPED"
               className="nav-links"
               onClick={closeMobileMenu}
             >

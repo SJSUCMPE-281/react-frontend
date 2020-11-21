@@ -14,6 +14,20 @@ export const getOrders = (id) => async (dispatch) => {
   const res = await axios.get(
     process.env.REACT_APP_BUYER_URL + `/api/buyer/${id}/order`
   );
-  console.log(res);
+  dispatch({ type: GET_ORDERS, payload: res.data });
+};
+
+export const getSellerOrders = (id, status) => async (dispatch) => {
+  const res = await axios.get(
+    process.env.REACT_APP_BUYER_URL + `/api/seller/${id}/order/${status}`
+  );
+  dispatch({ type: GET_ORDERS, payload: res.data });
+};
+
+export const updateSellerOrder = (id, sale) => async (dispatch) => {
+  const res = await axios.put(
+    process.env.REACT_APP_BUYER_URL + `/api/seller/${id}/order`,
+    sale
+  );
   dispatch({ type: GET_ORDERS, payload: res.data });
 };
