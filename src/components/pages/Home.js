@@ -57,18 +57,39 @@ class Home extends React.Component {
     );
   };
   addToCart = (product) => {
-    //const { cart } = this.props.cart;
     let newCart = {};
     let orderDetail = {};
     const user = Pool.getCurrentUser();
     if (user) {
       const id = user.getUsername();
       if (!this.props.cart) {
-        orderDetail = {
-          product: product,
-          quantity: 1,
-          orderDetailAmount: product.price,
-        };
+        console.log(product);
+        if (product.imageUrl) {
+          orderDetail = {
+            product: product,
+            quantity: 1,
+            orderDetailAmount: product.price,
+          };
+        } else if (product.mediaList) {
+          const newProduct = {
+            productId: product.productId,
+            productName: product.productName,
+            productDescription: product.productDescription,
+            price: product.price,
+            sellerId: product.sellerId,
+            shopName: product.shopName,
+            imageUrl: product.mediaList[0].url,
+            category: product.category,
+          };
+          console.log(newProduct);
+          orderDetail = {
+            product: newProduct,
+            quantity: 1,
+            orderDetailAmount: product.price,
+          };
+        }
+
+        console.log(orderDetail);
         newCart = {
           buyerId: id,
           orderDetails: [orderDetail],
@@ -78,7 +99,7 @@ class Home extends React.Component {
       } else {
         let alreadyInCart = false;
         this.props.cart.orderDetails.forEach((item) => {
-          if(item.product.sellerId === product.sellerId){
+          if (item.product.sellerId === product.sellerId) {
             if (item.product.productId === product.productId) {
               orderDetail = {
                 ...item,
@@ -90,7 +111,7 @@ class Home extends React.Component {
                 buyerId: id,
                 orderDetails: [...this.props.cart.orderDetails, orderDetail],
               };
-      
+
               console.log(newCart);
               this.props.saveCart(id, newCart);
             }
@@ -104,24 +125,21 @@ class Home extends React.Component {
                 buyerId: id,
                 orderDetails: [...this.props.cart.orderDetails, orderDetail],
               };
-      
+
               console.log(newCart);
               this.props.saveCart(id, newCart);
             }
-          }
-          else{
-            let choice = window.confirm("You can only order from a single Seller. Want to clear your cart and start filling again?");
+          } else {
+            let choice = window.confirm(
+              "You can only order from a single Seller. Want to clear your cart and start filling again?"
+            );
             if (choice === true) {
               this.props.deleteCart(id);
-              
             } else {
-              console.log("Dont Clear the cart")
-             
+              console.log("Dont Clear the cart");
             }
           }
-         
         });
-     
       }
     }
   };
@@ -187,4 +205,6 @@ function mapStateToProps({ products, cart }) {
   return { products, cart };
 }
 
-export default connect(mapStateToProps, { getCart, saveCart, deleteCart })(Home);
+export default connect(mapStateToProps, { getCart, saveCart, deleteCart })(
+  Home
+);

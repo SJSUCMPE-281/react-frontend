@@ -9,3 +9,4 @@ export const GET_SELLER_PRODUCTS = "GET_SELLER_PRODUCTS";
 export const GET_MEDIA = "GET_MEDIA";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const GET_ORDERS = "GET_ORDERS";
+export const GET_BILLING = "GET_BILLING";
