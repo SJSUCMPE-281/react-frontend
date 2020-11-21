@@ -419,8 +419,14 @@ li {
 .carouselWidth {
   width: 70rem;
 }
+
+.profileImage{
+  width: 90rem;
+  height: 50rem;
+}
 .carouselWidthHeight {
   width: 90rem;
+  height: 50rem;
 }
 .banner {
   width: 100%;
@@ -433,4 +439,7 @@ li {
 img.ordertable {
   height: 10%;
   width: 10%;
+}
+.profileMargin{
+  margin-top:100px;
 }
