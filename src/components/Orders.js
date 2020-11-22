@@ -8,7 +8,6 @@ class Orders extends Component {
     this.state = {
       id: this.props.match.params.id,
     };
-    console.log("id", this.state.id);
   }
   render() {
     return (
