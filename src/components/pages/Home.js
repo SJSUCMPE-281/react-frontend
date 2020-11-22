@@ -116,11 +116,31 @@ class Home extends React.Component {
               this.props.saveCart(id, newCart);
             }
             if (!alreadyInCart) {
-              orderDetail = {
-                product: product,
-                quantity: 1,
-                orderDetailAmount: product.price,
-              };
+              if (product.imageUrl) {
+                orderDetail = {
+                  product: product,
+                  quantity: 1,
+                  orderDetailAmount: product.price,
+                };
+              } else if (product.mediaList) {
+                const newProduct1 = {
+                  productId: product.productId,
+                  productName: product.productName,
+                  productDescription: product.productDescription,
+                  price: product.price,
+                  sellerId: product.sellerId,
+                  shopName: product.shopName,
+                  imageUrl: product.mediaList[0].url,
+                  category: product.category,
+                };
+                console.log(newProduct1);
+                orderDetail = {
+                  product: newProduct1,
+                  quantity: 1,
+                  orderDetailAmount: product.price,
+                };
+              }
+
               newCart = {
                 buyerId: id,
                 orderDetails: [...this.props.cart.orderDetails, orderDetail],
