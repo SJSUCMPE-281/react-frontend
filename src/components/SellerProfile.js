@@ -59,19 +59,10 @@ Pass Shop name and Shop description available in state attributes to the API.*/
   handleBilling = () => {
     this.setState({ showBillingModal: true });
   };
-  computeTax = () => {
-    let sum = 10 + this.props.billing.saleCount + this.props.billing.saleAmount;
-    let tax = (sum * 5) / 100;
-
-    return tax;
-  };
 
   computeSum = () => {
-    let subtotal =
-      10 + this.props.billing.saleCount + this.props.billing.saleAmount;
-    let tax = (subtotal * 5) / 100;
-    let sum = subtotal + tax;
-    return formatCurrency(sum);
+    let subtotal = this.props.billing.saleAmount * 0.01;
+    return formatCurrency(subtotal);
   };
   render() {
     console.log(this.props.user);
@@ -196,7 +187,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
                                     readOnly
                                   >
                                     <Form.Label column md="2">
-                                      SubTotal
+                                      Fixed Amount Due
                                     </Form.Label>
                                     <Col sm="10">
                                       <Form.Control
@@ -212,7 +203,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
                                     readOnly
                                   >
                                     <Form.Label column md="2">
-                                      Sale Count
+                                      Number of orders placed this month
                                     </Form.Label>
                                     <Col sm="10">
                                       <Form.Control
@@ -229,7 +220,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
                                     readOnly
                                   >
                                     <Form.Label column md="2">
-                                      Sale Amount
+                                      Total Sale Amount
                                     </Form.Label>
                                     <Col sm="10">
                                       <Form.Control
@@ -238,21 +229,6 @@ Pass Shop name and Shop description available in state attributes to the API.*/
                                         value={formatCurrency(
                                           this.props.billing.saleAmount
                                         )}
-                                      />
-                                    </Col>
-                                  </Form.Group>
-                                  <Form.Group
-                                    as={Row}
-                                    controlId="formPlaintextFirstName"
-                                  >
-                                    <Form.Label column md="2">
-                                      Tax Amount(%5)
-                                    </Form.Label>
-                                    <Col sm="10">
-                                      <Form.Control
-                                        size="md"
-                                        plaintext
-                                        value={this.computeTax()}
                                       />
                                     </Col>
                                   </Form.Group>

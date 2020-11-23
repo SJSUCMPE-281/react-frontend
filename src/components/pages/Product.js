@@ -54,7 +54,7 @@ class Product extends Component {
     const user = Pool.getCurrentUser();
     if (user) {
       const userId = user.getUsername();
-      user.getSession((err, session) => {
+      user.getSession(async (err, session) => {
         if (!err) {
           let firstname = session.getIdToken().payload["custom:firstName"];
           let lastname = session.getIdToken().payload["custom:lastName"];
@@ -68,7 +68,12 @@ class Product extends Component {
           };
           let prodId = this.state.product.productId;
           console.log(newReview);
-          this.props.saveProductReview(prodId, newReview);
+          await this.props.saveProductReview(
+            this.props.history,
+            prodId,
+            newReview
+          );
+          window.location.reload(false);
         }
       });
     }
@@ -175,6 +180,7 @@ class Product extends Component {
   render() {
     const { products } = this.props.products;
     console.log(products);
+
     return (
       <div>
         <Fade bottom cascade>
