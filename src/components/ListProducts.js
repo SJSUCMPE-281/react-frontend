@@ -26,10 +26,10 @@ class ListProducts extends Component {
       this.setState({ userState: this.props.user.seller });
     }
   }
-  deleteProduct = (product) => {
+  deleteProductOld = (product) => {
     /*axios to delete the product by passing the product Id and also update the state with remaining products */
     this.setState({
-      products: this.state.products.filter((prod) => prod._id !== product._id),
+      products: this.state.products.filter((prod) => prod.productId !== product.productId),
     });
   };
 
