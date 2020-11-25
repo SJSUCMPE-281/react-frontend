@@ -5,7 +5,10 @@ import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import ReactStars from "react-rating-stars-component";
 import { connect } from "react-redux";
-import { getSellerProducts, deleteSellerProduct } from "../actions/sellerProductActions";
+import {
+  getSellerProducts,
+  deleteSellerProduct,
+} from "../actions/sellerProductActions";
 import { getSeller } from "../actions/userActions";
 import SellerShopRegister from "./SellerShopRegister";
 import Pool from "../UserPool";
@@ -55,14 +58,11 @@ class SellerProducts extends Component {
     this.props.history.push(`/addproduct/${product.productId}`);
   };
 
-  deleteProduct = (product) => {
-    console.log("pstesting");
+  async deleteProduct(product) {
     console.log(product.productId, product.sellerId);
-    //this.props.deleteProduct(product);
-    this.props.deleteSellerProduct(product.productId, product.sellerId);
-    //window.location.pathname = '/listproducts';
-    this.props.history.push("/listproducts");
-  };
+    await this.props.deleteSellerProduct(product.productId, product.sellerId);
+    window.location.reload(false);
+  }
 
   renderShop() {
     const { sellerProducts } = this.props.sellerProducts;

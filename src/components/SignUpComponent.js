@@ -206,7 +206,7 @@ function SignUpComponent(props) {
         </Alert>
         <br />
         <Alert show={shows} variant="warning">
-          <Alert.Heading>Sigun Up Successful!</Alert.Heading>
+          <Alert.Heading>Sign Up Successful!</Alert.Heading>
         </Alert>
       </Container>
     </div>

@@ -21,3 +21,7 @@ export const saveMedia = (files) => async (dispatch) => {
   console.log(res);
   dispatch({ type: GET_MEDIA, payload: res.data });
 };
+
+export const clearMedia = () => async (dispatch) => {
+  dispatch({ type: GET_MEDIA, payload: {} });
+};

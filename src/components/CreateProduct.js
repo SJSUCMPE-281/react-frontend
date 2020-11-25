@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
-import { saveMedia } from "../actions/mediaActions";
+import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
-import { saveSellerProduct, updateSellerProduct } from "../actions/sellerProductActions";
+import {
+  saveSellerProduct,
+  updateSellerProduct,
+} from "../actions/sellerProductActions";
 import Pool from "../UserPool";
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { getProduct } from "../actions/productActions";
 import { withRouter } from "react-router-dom";
@@ -36,7 +39,7 @@ class CreateProduct extends Component {
       ],
 
       id: this.props.match.params.id,
-      userState: {}
+      userState: {},
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -84,11 +87,12 @@ class CreateProduct extends Component {
         price: this.props.products.product.price,
         category: this.props.products.product.category,
         image: this.props.products.files,
-
       });
     }
   }
-
+  componentWillUnmount() {
+    this.props.clearMedia();
+  }
   saveOrUpdateProduct = (e) => {
     e.preventDefault();
     let product = {
@@ -187,15 +191,20 @@ class CreateProduct extends Component {
       <div>
         <NavbarSeller />
         <br></br>
-        {Object.keys(this.state.userState).length === 0 ?
-          <i className="fa fa-spinner fa-spin"></i> :
+        {Object.keys(this.state.userState).length === 0 ? (
+          <i className="fa fa-spinner fa-spin"></i>
+        ) : (
           <>
             {this.state.userState.shopName === null ? (
               <Container>
-                <Link to='/listproducts'>
-                  <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
+                <Link to="/listproducts">
+                  <Button variant="primary">
+                    Please Register Your Shop to Add Your Products
+                  </Button>
                 </Link>
-              </Container>) : <>
+              </Container>
+            ) : (
+              <>
                 <div className="container">
                   <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -239,10 +248,18 @@ class CreateProduct extends Component {
                               className="form-control"
                               onChange={this.changeProductCategoryHandler}
                             >
-                              <option value=""> Please choose a category </option>
+                              <option value="">
+                                {" "}
+                                Please choose a category{" "}
+                              </option>
                               {this.state.categoryList.map((cat) => {
                                 if (this.state.category === cat) {
-                                  return <option value={cat} selected="selected"> {cat} </option>;
+                                  return (
+                                    <option value={cat} selected="selected">
+                                      {" "}
+                                      {cat}{" "}
+                                    </option>
+                                  );
                                 } else {
                                   return <option value={cat}> {cat} </option>;
                                 }
@@ -268,23 +285,23 @@ class CreateProduct extends Component {
                             onClick={this.saveOrUpdateProduct}
                           >
                             Save
-                  </button>
+                          </button>
                           <button
                             className="btn btn-danger"
                             onClick={this.cancel.bind(this)}
                             style={{ marginLeft: "10px" }}
                           >
                             Cancel
-                  </button>
+                          </button>
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
-              </>}
-
-          </>}
-
+              </>
+            )}
+          </>
+        )}
       </div>
     );
   }
@@ -299,4 +316,5 @@ export default connect(mapStateToProps, {
   getProduct,
   updateSellerProduct,
   saveSellerProduct,
-})(withRouter(CreateProduct));
+  clearMedia,
+})(CreateProduct);
