@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import {
-  getProducts,
   getProduct,
   getReviews,
   saveProductReview,
@@ -45,9 +44,6 @@ class Product extends Component {
   closeModal = () => {
     this.setState({ product: null, rating: "", review: "" });
   };
-  componentDidMount() {
-    this.props.getProducts();
-  }
 
   addReview = () => {
     this.closeModal();
@@ -108,7 +104,7 @@ class Product extends Component {
                   </p>
                   <p>{product.productDescription}</p>
                   <div className="product-price">
-                    <div>{formatCurrency(product.price)}</div>
+                    <div>{product.price}</div>
                     <button
                       className="button primary"
                       onClick={() => {
@@ -177,10 +173,10 @@ class Product extends Component {
       </div>
     );
   }
+
   render() {
     const { products } = this.props.products;
-    console.log(products);
-
+    console.log(this.props);
     return (
       <div>
         <Fade bottom cascade>
@@ -213,7 +209,7 @@ class Product extends Component {
                     {product.reviewCount}
                   </span>
                   <div className="product-price">
-                    <div>{formatCurrency(product.price)}</div>
+                    <div>{product.price}</div>
                     <button
                       onClick={() => this.props.addToCart(product)}
                       className="button primary"
@@ -236,7 +232,6 @@ function mapStateToProps({ products, reviews }) {
 }
 
 export default connect(mapStateToProps, {
-  getProducts,
   getProduct,
   getReviews,
   saveProductReview,

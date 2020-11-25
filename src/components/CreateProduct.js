@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
-import { saveMedia } from "../actions/mediaActions";
+import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
 import { saveSellerProduct } from "../actions/sellerProductActions";
 import Pool from "../UserPool";
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 class CreateProduct extends Component {
@@ -34,7 +34,7 @@ class CreateProduct extends Component {
       ],
 
       id: this.props.match.params.id,
-      userState:{}
+      userState: {},
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -74,7 +74,9 @@ class CreateProduct extends Component {
       // });
     }
   }
-
+  componentWillUnmount() {
+    this.props.clearMedia();
+  }
   saveOrUpdateProduct = (e) => {
     e.preventDefault();
     let product = {
@@ -108,7 +110,7 @@ class CreateProduct extends Component {
         this.props.saveSellerProduct(userId, newProduct);
       }
     } else {
-      /* Add axios to update the product here*/ 
+      /* Add axios to update the product here*/
     }
     this.props.history.push("/listproducts");
   };
@@ -159,100 +161,108 @@ class CreateProduct extends Component {
       <div>
         <NavbarSeller />
         <br></br>
-        {Object.keys(this.state.userState).length === 0 ?
-          <i className="fa fa-spinner fa-spin"></i> :
+        {Object.keys(this.state.userState).length === 0 ? (
+          <i className="fa fa-spinner fa-spin"></i>
+        ) : (
           <>
-          {this.state.userState.shopName === null ? (
-          <Container>
-            <Link to='/listproducts'>
-              <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
-            </Link>
-          </Container>) : <>
-            <div className="container">
-          <div className="row">
-            <div className="card col-md-6 offset-md-3 offset-md-3">
-              {this.getTitle()}
-              <div className="card-body">
-                <form>
-                  <div className="form-group">
-                    <label>Product Title </label>
-                    <input
-                      placeholder="Product Title"
-                      name="productTitle"
-                      className="form-control"
-                      value={this.state.title}
-                      onChange={this.changeProductTitleHandler}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Product Description </label>
-                    <input
-                      placeholder="Product Description"
-                      name="productDescription"
-                      className="form-control"
-                      value={this.state.description}
-                      onChange={this.changeProductDescHandler}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Product Price </label>
-                    <input
-                      placeholder="Product Price"
-                      name="productPrice"
-                      className="form-control"
-                      value={this.state.price}
-                      onChange={this.changeProductPriceHandler}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label> Category </label>
-                    <select
-                      name="category"
-                      className="form-control"
-                      onChange={this.changeProductCategoryHandler}
-                    >
-                      <option value=""> Please choose a category </option>
-                      {this.state.categoryList.map((cat) => {
-                        return <option value={cat}> {cat} </option>;
-                      })}
-                    </select>
-                  </div>
-                  <div className="form-group upload-steps">
-                    <label> Image </label>
-                    <input
-                      name="url"
-                      type="file"
-                      multiple
-                      ref={this.fileInput}
-                      className="form-control"
-                      value={this.state.image}
-                      onChange={this.changeProductImageHandler}
-                    />
-                  </div>
-                  {this.renderAlert()}
+            {this.state.userState.shopName === null ? (
+              <Container>
+                <Link to="/listproducts">
+                  <Button variant="primary">
+                    Please Register Your Shop to Add Your Products
+                  </Button>
+                </Link>
+              </Container>
+            ) : (
+              <>
+                <div className="container">
+                  <div className="row">
+                    <div className="card col-md-6 offset-md-3 offset-md-3">
+                      {this.getTitle()}
+                      <div className="card-body">
+                        <form>
+                          <div className="form-group">
+                            <label>Product Title </label>
+                            <input
+                              placeholder="Product Title"
+                              name="productTitle"
+                              className="form-control"
+                              value={this.state.title}
+                              onChange={this.changeProductTitleHandler}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Product Description </label>
+                            <input
+                              placeholder="Product Description"
+                              name="productDescription"
+                              className="form-control"
+                              value={this.state.description}
+                              onChange={this.changeProductDescHandler}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label> Product Price </label>
+                            <input
+                              placeholder="Product Price"
+                              name="productPrice"
+                              className="form-control"
+                              value={this.state.price}
+                              onChange={this.changeProductPriceHandler}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label> Category </label>
+                            <select
+                              name="category"
+                              className="form-control"
+                              onChange={this.changeProductCategoryHandler}
+                            >
+                              <option value="">
+                                {" "}
+                                Please choose a category{" "}
+                              </option>
+                              {this.state.categoryList.map((cat) => {
+                                return <option value={cat}> {cat} </option>;
+                              })}
+                            </select>
+                          </div>
+                          <div className="form-group upload-steps">
+                            <label> Image </label>
+                            <input
+                              name="url"
+                              type="file"
+                              multiple
+                              ref={this.fileInput}
+                              className="form-control"
+                              value={this.state.image}
+                              onChange={this.changeProductImageHandler}
+                            />
+                          </div>
+                          {this.renderAlert()}
 
-                  <button
-                    className="btn btn-success"
-                    onClick={this.saveOrUpdateProduct}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="btn btn-danger"
-                    onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        </>}
-         
-          </>}
-      
+                          <button
+                            className="btn btn-success"
+                            onClick={this.saveOrUpdateProduct}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={this.cancel.bind(this)}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </>
+        )}
       </div>
     );
   }
@@ -265,4 +275,5 @@ export default connect(mapStateToProps, {
   saveMedia,
   getSeller,
   saveSellerProduct,
+  clearMedia,
 })(CreateProduct);

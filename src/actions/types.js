@@ -10,3 +10,4 @@ export const GET_MEDIA = "GET_MEDIA";
 export const GET_REVIEWS = "GET_REVIEWS";
 export const GET_ORDERS = "GET_ORDERS";
 export const GET_BILLING = "GET_BILLING";
+export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";

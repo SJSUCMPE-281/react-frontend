@@ -6,29 +6,41 @@ import data from "../../data.json";
 import Cart from "./Cart";
 import Navbar from "../Navbar";
 import { connect } from "react-redux";
-import { getProducts } from "../../actions/productActions";
+import { getProducts, getSearchResult } from "../../actions/productActions";
 import { getCart, saveCart, deleteCart } from "../../actions/cartActions";
 import Pool from "../../UserPool";
+import Autosuggest from "react-autosuggest";
+import axios from "axios";
+import { debounce } from "throttle-debounce";
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
       /*need to replace the products array with products array from Backend API*/
-      products: data.products,
+      products: [],
       cartItems: localStorage.getItem("cartItems")
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
       size: "",
       sort: "",
+      value: "",
+      suggestions: [],
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     const user = Pool.getCurrentUser();
     if (user) {
       this.props.getCart(user.getUsername());
     }
+    await this.props.getProducts();
+    this.setState({ products: this.props.products.products });
+    this.onSuggestionsFetchRequested = debounce(
+      500,
+      this.onSuggestionsFetchRequested
+    );
   }
+
   filterProducts = (event) => {
     console.log(event.target.value);
     if (event.target.value === "") {
@@ -188,9 +200,52 @@ class Home extends React.Component {
         ),
     }));
   };
+  renderSuggestion = (suggestion) => {
+    return (
+      <div className="result">
+        <div>{suggestion.productName}</div>
+        <div className="shortCode">{suggestion.shortCode}</div>
+      </div>
+    );
+  };
+  onChange = (event, { newValue }) => {
+    this.setState({ value: newValue });
+  };
+  onSuggestionsFetchRequested = ({ value }) => {
+    axios
+      .get(
+        `https://b8pwzo8uoa.execute-api.us-east-1.amazonaws.com/test?q=${value}`
+      )
+      .then((res) => {
+        const results = res.data.hits.hits.map((h) => h._source);
+        this.setState({ suggestions: results });
+      });
+  };
+
+  onSuggestionsClearRequested = () => {
+    this.setState({ suggestions: [] });
+    this.props.getProducts();
+    this.setState({ products: this.props.products.products });
+  };
+
+  handleSearchClick = () => {
+    const param = {
+      q: this.state.value,
+    };
+    this.props.getSearchResult(param);
+    this.setState({ products: this.props.products.products });
+  };
   render() {
     // const { cart } = this.props.cart;
-    console.log(this.props.cart);
+    console.log(this.state.products);
+    console.log(this.state.value);
+    console.log(this.state.suggestions);
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: "search product",
+      value,
+      onChange: this.onChange,
+    };
     return (
       <>
         <Navbar />
@@ -198,14 +253,30 @@ class Home extends React.Component {
           <main>
             <div className="content">
               <div className="main">
+                <Autosuggest
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                  getSuggestionValue={(suggestion) => suggestion.productName}
+                  renderSuggestion={this.renderSuggestion}
+                  inputProps={inputProps}
+                />
+                <button
+                  className="btn btn-success"
+                  onClick={this.handleSearchClick}
+                >
+                  submit
+                </button>
                 <Filter
-                  count={this.state.products.length}
                   size={this.state.size}
                   sort={this.state.sort}
                   filterProducts={this.filterProducts}
                   sortProducts={this.sortProducts}
                 ></Filter>
-                <Product addToCart={this.addToCart} />
+                <Product
+                  products={this.state.products}
+                  addToCart={this.addToCart}
+                />
               </div>
               <div className="sidebar">
                 <Cart
@@ -225,6 +296,10 @@ function mapStateToProps({ products, cart }) {
   return { products, cart };
 }
 
-export default connect(mapStateToProps, { getCart, saveCart, deleteCart })(
-  Home
-);
+export default connect(mapStateToProps, {
+  getProducts,
+  getCart,
+  saveCart,
+  deleteCart,
+  getSearchResult,
+})(Home);

@@ -1,4 +1,8 @@
-import { GET_PRODUCTS, GET_PRODUCT } from "../actions/types";
+import {
+  GET_PRODUCTS,
+  GET_PRODUCT,
+  GET_SEARCH_RESULTS,
+} from "../actions/types";
 
 const initialstate = {
   products: [],
@@ -22,6 +26,11 @@ export default function (state = initialstate, action) {
       return {
         ...state,
         product: action.payload,
+      };
+    case GET_SEARCH_RESULTS:
+      return {
+        ...state,
+        products: action.payload.hits.hits.map((h) => h._source),
       };
     default:
       return state;

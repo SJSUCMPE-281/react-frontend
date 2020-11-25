@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
-import { saveMedia } from "../actions/mediaActions";
+import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { connect } from "react-redux";
 import { getSeller, saveSeller } from "../actions/userActions";
 import Pool from "../UserPool";
@@ -31,6 +31,9 @@ class SellerShopRegister extends Component {
   registerShop() {
     this.setState({ showRegisterModal: true });
   }
+  componentWillUnmount() {
+    this.props.clearMedia();
+  }
   confirmRegistration() {
     const { images } = this.props.images;
     this.setState({ showRegisterModal: false });
@@ -49,7 +52,7 @@ class SellerShopRegister extends Component {
     };
     console.log(newSeller);
     this.props.saveSeller(newSeller);
-    window.location.pathname = '/listproducts';
+    window.location.pathname = "/listproducts";
   }
 
   changeProductImageHandler = (event) => {
@@ -60,6 +63,15 @@ class SellerShopRegister extends Component {
   closeModal = () => {
     this.setState({ showRegisterModal: false });
   };
+  renderAlert() {
+    if (this.props.images.images.length > 0) {
+      return (
+        <div class="alert alert-success" role="alert">
+          Successfully uploaded {this.props.images.images.length} images!
+        </div>
+      );
+    }
+  }
   render() {
     console.log(this.props.user);
     return (
@@ -123,6 +135,7 @@ class SellerShopRegister extends Component {
                             onChange={this.changeProductImageHandler}
                           />
                         </div>
+                        {this.renderAlert()}
                         <button
                           className="btn btn-success"
                           onClick={this.confirmRegistration}
@@ -151,6 +164,9 @@ class SellerShopRegister extends Component {
 function mapStateToProps({ images, user }) {
   return { images, user };
 }
-export default connect(mapStateToProps, { saveMedia, getSeller, saveSeller })(
-  SellerShopRegister
-);
+export default connect(mapStateToProps, {
+  saveMedia,
+  getSeller,
+  saveSeller,
+  clearMedia,
+})(SellerShopRegister);
