@@ -3,11 +3,13 @@ import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
 import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
-import { saveSellerProduct } from "../actions/sellerProductActions";
+import { saveSellerProduct, updateSellerProduct } from "../actions/sellerProductActions";
 import Pool from "../UserPool";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { getProduct } from "../actions/productActions";
+import { withRouter } from "react-router-dom";
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -34,7 +36,11 @@ class CreateProduct extends Component {
       ],
 
       id: this.props.match.params.id,
+<<<<<<< HEAD
       userState: {},
+=======
+      userState: {}
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -47,7 +53,7 @@ class CreateProduct extends Component {
     this.saveOrUpdateProduct = this.saveOrUpdateProduct.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const user = Pool.getCurrentUser();
     if (user) {
       const userId = user.getUsername();
@@ -72,6 +78,18 @@ class CreateProduct extends Component {
       //   category: product[0].category,
       //   image: product[0].image,
       // });
+      const userId = user.getUsername();
+      const resp = await this.props.getProduct(userId, this.state.id);
+      console.log(this.props.products);
+      this.setState({
+        _id: this.props.products.product.productId,
+        title: this.props.products.product.productName,
+        description: this.props.products.product.productDescription,
+        price: this.props.products.product.price,
+        category: this.props.products.product.category,
+        image: this.props.products.files,
+
+      });
     }
   }
   componentWillUnmount() {
@@ -111,8 +129,25 @@ class CreateProduct extends Component {
       }
     } else {
       /* Add axios to update the product here*/
+<<<<<<< HEAD
+=======
+      const { images } = this.props.images;
+      const user = Pool.getCurrentUser();
+
+      if (user) {
+        const userId = user.getUsername();
+        let updateProduct = this.props.products.product;
+        updateProduct.productName = this.state.title;
+        updateProduct.productDescription = this.state.description;
+        updateProduct.price = this.state.price;
+        updateProduct.category = this.state.category;
+        updateProduct.mediaList = [...images];
+        this.props.updateSellerProduct(userId, updateProduct);
+      }
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
     }
     this.props.history.push("/listproducts");
+    //window.location.pathname = '/listproducts';
   };
 
   changeProductTitleHandler = (event) => {
@@ -167,6 +202,7 @@ class CreateProduct extends Component {
           <>
             {this.state.userState.shopName === null ? (
               <Container>
+<<<<<<< HEAD
                 <Link to="/listproducts">
                   <Button variant="primary">
                     Please Register Your Shop to Add Your Products
@@ -175,6 +211,12 @@ class CreateProduct extends Component {
               </Container>
             ) : (
               <>
+=======
+                <Link to='/listproducts'>
+                  <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
+                </Link>
+              </Container>) : <>
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                 <div className="container">
                   <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -218,12 +260,22 @@ class CreateProduct extends Component {
                               className="form-control"
                               onChange={this.changeProductCategoryHandler}
                             >
+<<<<<<< HEAD
                               <option value="">
                                 {" "}
                                 Please choose a category{" "}
                               </option>
                               {this.state.categoryList.map((cat) => {
                                 return <option value={cat}> {cat} </option>;
+=======
+                              <option value=""> Please choose a category </option>
+                              {this.state.categoryList.map((cat) => {
+                                if (this.state.category === cat) {
+                                  return <option value={cat} selected="selected"> {cat} </option>;
+                                } else {
+                                  return <option value={cat}> {cat} </option>;
+                                }
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                               })}
                             </select>
                           </div>
@@ -246,34 +298,55 @@ class CreateProduct extends Component {
                             onClick={this.saveOrUpdateProduct}
                           >
                             Save
+<<<<<<< HEAD
                           </button>
+=======
+                  </button>
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                           <button
                             className="btn btn-danger"
                             onClick={this.cancel.bind(this)}
                             style={{ marginLeft: "10px" }}
                           >
                             Cancel
+<<<<<<< HEAD
                           </button>
+=======
+                  </button>
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
               </>
             )}
           </>
         )}
+=======
+              </>}
+
+          </>}
+
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
       </div>
     );
   }
 }
-function mapStateToProps({ images, user }) {
-  return { images, user };
+function mapStateToProps({ images, user, products }) {
+  return { images, user, products };
 }
 
 export default connect(mapStateToProps, {
   saveMedia,
   getSeller,
+  getProduct,
+  updateSellerProduct,
   saveSellerProduct,
+<<<<<<< HEAD
   clearMedia,
 })(CreateProduct);
+=======
+})(withRouter(CreateProduct));
+>>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
