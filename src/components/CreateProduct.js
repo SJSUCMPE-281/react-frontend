@@ -202,21 +202,10 @@ class CreateProduct extends Component {
           <>
             {this.state.userState.shopName === null ? (
               <Container>
-<<<<<<< HEAD
-                <Link to="/listproducts">
-                  <Button variant="primary">
-                    Please Register Your Shop to Add Your Products
-                  </Button>
-                </Link>
-              </Container>
-            ) : (
-              <>
-=======
                 <Link to='/listproducts'>
                   <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
                 </Link>
               </Container>) : <>
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                 <div className="container">
                   <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
