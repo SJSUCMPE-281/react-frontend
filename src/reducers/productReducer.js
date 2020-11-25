@@ -2,6 +2,7 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT,
   GET_SEARCH_RESULTS,
+  DELETE_PRODUCT,
 } from "../actions/types";
 
 const initialstate = {
@@ -17,11 +18,13 @@ export default function (state = initialstate, action) {
         ...state,
         products: action.payload.content,
       };
-    //   case DELETE_FILE:
-    //     return {
-    //       ...state,
-    //       files: state.files.filter((file) => file.fileId !== action.payload),
-    //     };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.productId !== action.payload
+        ),
+      };
     case GET_PRODUCT:
       return {
         ...state,

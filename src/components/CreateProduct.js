@@ -3,7 +3,10 @@ import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
 import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
-import { saveSellerProduct, updateSellerProduct } from "../actions/sellerProductActions";
+import {
+  saveSellerProduct,
+  updateSellerProduct,
+} from "../actions/sellerProductActions";
 import Pool from "../UserPool";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -36,11 +39,7 @@ class CreateProduct extends Component {
       ],
 
       id: this.props.match.params.id,
-<<<<<<< HEAD
       userState: {},
-=======
-      userState: {}
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
     };
     console.log("id", this.state.id);
     this.changeProductTitleHandler = this.changeProductTitleHandler.bind(this);
@@ -88,7 +87,6 @@ class CreateProduct extends Component {
         price: this.props.products.product.price,
         category: this.props.products.product.category,
         image: this.props.products.files,
-
       });
     }
   }
@@ -129,8 +127,6 @@ class CreateProduct extends Component {
       }
     } else {
       /* Add axios to update the product here*/
-<<<<<<< HEAD
-=======
       const { images } = this.props.images;
       const user = Pool.getCurrentUser();
 
@@ -144,7 +140,6 @@ class CreateProduct extends Component {
         updateProduct.mediaList = [...images];
         this.props.updateSellerProduct(userId, updateProduct);
       }
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
     }
     this.props.history.push("/listproducts");
     //window.location.pathname = '/listproducts';
@@ -202,10 +197,14 @@ class CreateProduct extends Component {
           <>
             {this.state.userState.shopName === null ? (
               <Container>
-                <Link to='/listproducts'>
-                  <Button variant="primary">Please Register Your Shop to Add Your Products</Button>
+                <Link to="/listproducts">
+                  <Button variant="primary">
+                    Please Register Your Shop to Add Your Products
+                  </Button>
                 </Link>
-              </Container>) : <>
+              </Container>
+            ) : (
+              <>
                 <div className="container">
                   <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -249,22 +248,21 @@ class CreateProduct extends Component {
                               className="form-control"
                               onChange={this.changeProductCategoryHandler}
                             >
-<<<<<<< HEAD
                               <option value="">
                                 {" "}
                                 Please choose a category{" "}
                               </option>
                               {this.state.categoryList.map((cat) => {
-                                return <option value={cat}> {cat} </option>;
-=======
-                              <option value=""> Please choose a category </option>
-                              {this.state.categoryList.map((cat) => {
                                 if (this.state.category === cat) {
-                                  return <option value={cat} selected="selected"> {cat} </option>;
+                                  return (
+                                    <option value={cat} selected="selected">
+                                      {" "}
+                                      {cat}{" "}
+                                    </option>
+                                  );
                                 } else {
                                   return <option value={cat}> {cat} </option>;
                                 }
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                               })}
                             </select>
                           </div>
@@ -287,38 +285,23 @@ class CreateProduct extends Component {
                             onClick={this.saveOrUpdateProduct}
                           >
                             Save
-<<<<<<< HEAD
                           </button>
-=======
-                  </button>
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                           <button
                             className="btn btn-danger"
                             onClick={this.cancel.bind(this)}
                             style={{ marginLeft: "10px" }}
                           >
                             Cancel
-<<<<<<< HEAD
                           </button>
-=======
-                  </button>
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
-<<<<<<< HEAD
               </>
             )}
           </>
         )}
-=======
-              </>}
-
-          </>}
-
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
       </div>
     );
   }
@@ -333,9 +316,5 @@ export default connect(mapStateToProps, {
   getProduct,
   updateSellerProduct,
   saveSellerProduct,
-<<<<<<< HEAD
   clearMedia,
 })(CreateProduct);
-=======
-})(withRouter(CreateProduct));
->>>>>>> 7c93273807c1a50b460a64a87c84b2671fa8d6c7
