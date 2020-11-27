@@ -2,7 +2,6 @@
 import React from "react";
 import Filter from "./Filter";
 import Product from "./Product";
-import data from "../../data.json";
 import Cart from "./Cart";
 import Navbar from "../Navbar";
 import { connect } from "react-redux";
@@ -41,19 +40,6 @@ class Home extends React.Component {
     );
   }
 
-  filterProducts = (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "") {
-      this.setState({ size: event.target.value, products: data.products });
-    } else {
-      this.setState({
-        size: event.target.value,
-        products: data.products.filter(
-          (product) => product.category.indexOf(event.target.value) >= 0
-        ),
-      });
-    }
-  };
   createOrder = (order) => {
     console.log(order);
     alert("Save order for" + order.name);
@@ -181,7 +167,7 @@ class Home extends React.Component {
   sortProducts = (event) => {
     const sort = event.target.value;
     console.log(event.target.value);
-    this.setState((state) => ({
+    this.setState({
       sort: sort,
       products: this.state.products
         .slice()
@@ -198,7 +184,7 @@ class Home extends React.Component {
             ? 1
             : -1
         ),
-    }));
+    });
   };
   renderSuggestion = (suggestion) => {
     return (
@@ -272,9 +258,8 @@ class Home extends React.Component {
                   </button>
                   </div>
                 <Filter
-                  size={this.state.size}
+                  size={this.state.products.length}
                   sort={this.state.sort}
-                  filterProducts={this.filterProducts}
                   sortProducts={this.sortProducts}
                 ></Filter>
                 <Product
