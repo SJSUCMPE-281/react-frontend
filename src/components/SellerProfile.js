@@ -14,6 +14,10 @@ import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import { getBilling } from "../actions/billingActions";
 import formatCurrency from "../util";
+import { saveMedia, clearMedia  } from "../actions/mediaActions";
+import {
+  saveSellerImages
+} from "../actions/sellerProductActions";
 
 class SellerProfile extends Component {
   constructor(props) {
@@ -24,6 +28,7 @@ class SellerProfile extends Component {
       showUploadModal: false,
       showBillingModal: false,
       image: "",
+      file:""
     };
 
     this.changeShopImageHandler = this.changeShopImageHandler.bind(this);
@@ -34,7 +39,7 @@ class SellerProfile extends Component {
     if (user) {
       const id = user.getUsername();
       const response = await this.props.getSeller(id);
-      console.log();
+      console.log(response);
       this.setState({ userState: this.props.user.seller });
       this.props.getBilling(id);
     }
@@ -46,15 +51,27 @@ class SellerProfile extends Component {
     this.setState({ showUploadModal: false, showBillingModal: false });
   };
   changeShopImageHandler = (event) => {
-    this.setState({ image: event.target.value });
+    this.setState({ image: event.target.value,
+    file:event.target.files[0]});
     const files = event.target.files;
     console.log(files);
+    this.props.saveMedia(files);
   };
+  componentWillUnmount() {
+    this.props.clearMedia();
+  }
   confirmUpload = () => {
     this.setState({ showUploadModal: false });
-    console.log(this.state);
+    
     /*Axios to save the shop name and shop description to database 
 Pass Shop name and Shop description available in state attributes to the API.*/
+  let sellerId = this.props.user.seller.sellerId;
+  const { images } = this.props.images;
+  console.log(sellerId);
+  console.log(...images);
+  console.log(this.state.file);
+  this.props.saveSellerImages(sellerId,this.state.file);
+  window.location.pathname = "/sellerprofile";
   };
   handleBilling = () => {
     this.setState({ showBillingModal: true });
@@ -67,6 +84,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
   render() {
     console.log(this.props.user);
     console.log(this.props.billing);
+    console.log(this.props.images);
 
     return (
       <>
@@ -353,10 +371,13 @@ Pass Shop name and Shop description available in state attributes to the API.*/
     );
   }
 }
-function mapStateToProps({ user, billing }) {
-  return { user, billing };
+function mapStateToProps({ images, user, billing }) {
+  return { images, user, billing };
 }
 export default connect(mapStateToProps, {
+  saveMedia,
+  saveSellerImages,
   getSeller,
   getBilling,
+  clearMedia,
 })(SellerProfile);

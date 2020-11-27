@@ -38,3 +38,22 @@ export const deleteSellerProduct = (productId, sellerId) => async (
   );
   dispatch({ type: DELETE_PRODUCT, payload: res.data });
 };
+
+export const saveSellerImages = (sellerId, image) => async (dispatch) => {
+
+  const formData = new FormData();
+    formData.append("image", image);
+
+    console.log(sellerId,image);
+  const res = await axios.post(
+    process.env.REACT_APP_SELLER_URL + `/api/seller/${sellerId}/media`,
+    formData,
+    {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    }
+  );
+  console.log(res);
+  dispatch({ type: GET_SELLER_PRODUCTS, payload: res.data });
+};
