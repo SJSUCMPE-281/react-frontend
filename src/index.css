@@ -443,3 +443,16 @@ img.ordertable {
 .profileMargin{
   margin-top:100px;
 }
+.searchbox{
+  width:500px;
+  display: inline-block;
+  margin-right:25px;
+}
+.searchDiv{
+  margin-left:100px;
+  width:700px;
+  display: inline-block;
+}
+.react-autosuggest__input{
+  width:500px;
+}
