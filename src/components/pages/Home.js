@@ -253,20 +253,24 @@ class Home extends React.Component {
           <main>
             <div className="content">
               <div className="main">
-                <Autosuggest
-                  suggestions={suggestions}
-                  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                  onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                  getSuggestionValue={(suggestion) => suggestion.productName}
-                  renderSuggestion={this.renderSuggestion}
-                  inputProps={inputProps}
-                />
+                <div className="searchDiv">
+                <div className="searchbox">
+                  <Autosuggest
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={(suggestion) => suggestion.productName}
+                    renderSuggestion={this.renderSuggestion}
+                    inputProps={inputProps}
+                  />
+                </div>
                 <button
-                  className="btn btn-success"
-                  onClick={this.handleSearchClick}
-                >
-                  submit
-                </button>
+                    className="btn btn-success"
+                    onClick={this.handleSearchClick}
+                  >
+                    submit
+                  </button>
+                  </div>
                 <Filter
                   size={this.state.size}
                   sort={this.state.sort}
