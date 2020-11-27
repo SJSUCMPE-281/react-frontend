@@ -1,6 +1,5 @@
 //feature-1
 import React from "react";
-import Filter from "./Filter";
 import Product from "./Product";
 import Cart from "./Cart";
 import Navbar from "../Navbar";
@@ -22,9 +21,9 @@ class Home extends React.Component {
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
       size: "",
-      sort: "",
       value: "",
       suggestions: [],
+      sortAscending: true,
     };
   }
   async componentDidMount() {
@@ -164,28 +163,7 @@ class Home extends React.Component {
   updateRating = (newRating, product) => {
     console.log(newRating, product);
   };
-  sortProducts = (event) => {
-    const sort = event.target.value;
-    console.log(event.target.value);
-    this.setState({
-      sort: sort,
-      products: this.state.products
-        .slice()
-        .sort((a, b) =>
-          sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : a._id > b._id
-            ? 1
-            : -1
-        ),
-    });
-  };
+
   renderSuggestion = (suggestion) => {
     return (
       <div className="result">
@@ -222,10 +200,6 @@ class Home extends React.Component {
     this.setState({ products: this.props.products.products });
   };
   render() {
-    // const { cart } = this.props.cart;
-    console.log(this.state.products);
-    console.log(this.state.value);
-    console.log(this.state.suggestions);
     const { value, suggestions } = this.state;
     const inputProps = {
       placeholder: "search product",
@@ -240,28 +214,30 @@ class Home extends React.Component {
             <div className="content">
               <div className="main">
                 <div className="searchDiv">
-                <div className="searchbox">
-                  <Autosuggest
-                    suggestions={suggestions}
-                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                    getSuggestionValue={(suggestion) => suggestion.productName}
-                    renderSuggestion={this.renderSuggestion}
-                    inputProps={inputProps}
-                  />
-                </div>
-                <button
+                  <div className="searchbox">
+                    <Autosuggest
+                      suggestions={suggestions}
+                      onSuggestionsFetchRequested={
+                        this.onSuggestionsFetchRequested
+                      }
+                      onSuggestionsClearRequested={
+                        this.onSuggestionsClearRequested
+                      }
+                      getSuggestionValue={(suggestion) =>
+                        suggestion.productName
+                      }
+                      renderSuggestion={this.renderSuggestion}
+                      inputProps={inputProps}
+                    />
+                  </div>
+                  <button
                     className="btn btn-success"
                     onClick={this.handleSearchClick}
                   >
                     submit
                   </button>
-                  </div>
-                <Filter
-                  size={this.state.products.length}
-                  sort={this.state.sort}
-                  sortProducts={this.sortProducts}
-                ></Filter>
+                </div>
+
                 <Product
                   products={this.state.products}
                   addToCart={this.addToCart}
