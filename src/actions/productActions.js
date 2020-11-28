@@ -6,9 +6,9 @@ import {
   GET_SEARCH_RESULTS,
 } from "./types";
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (page) => async (dispatch) => {
   const res = await axios.get(
-    process.env.REACT_APP_BUYER_URL + "/api/product?page=0&size=30"
+    process.env.REACT_APP_BUYER_URL + `/api/product?page=${page}&size=9`
   );
 
   dispatch({ type: GET_PRODUCTS, payload: res.data });
@@ -36,7 +36,7 @@ export const saveProductReview = (history, productId, newReview) => async (
     process.env.REACT_APP_SELLER_URL + `/api/product/${productId}/review`,
     newReview
   );
-  history.push("/home");
+  history.push("/buyerhome");
 
   dispatch({ type: GET_REVIEWS, payload: res.data });
 };

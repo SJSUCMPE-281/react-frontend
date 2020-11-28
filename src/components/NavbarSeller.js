@@ -25,7 +25,7 @@ function NavbarSeller() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
+        <Link to="/sellerhome" className="navbar-logo" onClick={closeMobileMenu}>
           SaaS Shoppe
           <i class="fab fa-firstdraft" />
         </Link>
@@ -35,7 +35,7 @@ function NavbarSeller() {
         <ul className={click ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
             <Link
-              to="/orders/ORDERED"
+              to="/sellerhome/orders/ORDERED"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -44,7 +44,7 @@ function NavbarSeller() {
           </li>
           <li className="nav-item">
             <Link
-              to="/orders/SHIPPED"
+              to="/sellerhome/orders/SHIPPED"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -53,7 +53,7 @@ function NavbarSeller() {
           </li>
           <li className="nav-item">
             <Link
-              to="/listproducts"
+              to="/sellerhome"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -62,7 +62,7 @@ function NavbarSeller() {
           </li>
           <li className="nav-item">
             <Link
-              to="/addproduct/_add"
+              to="/sellerhome/addproduct/_add"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -71,7 +71,7 @@ function NavbarSeller() {
           </li>
           <li className="nav-item">
             <Link
-              to="/sellerprofile"
+              to="/sellerhome/sellerprofile"
               className="nav-links"
               onClick={closeMobileMenu}
             >

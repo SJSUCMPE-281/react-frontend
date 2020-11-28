@@ -2,7 +2,6 @@
 import React from "react";
 import Product from "./Product";
 import Cart from "./Cart";
-import Navbar from "../Navbar";
 import { connect } from "react-redux";
 import { getProducts, getSearchResult } from "../../actions/productActions";
 import { getCart, saveCart, deleteCart } from "../../actions/cartActions";
@@ -10,7 +9,7 @@ import Pool from "../../UserPool";
 import Autosuggest from "react-autosuggest";
 import axios from "axios";
 import { debounce } from "throttle-debounce";
-
+import ReactPaginate from 'react-paginate';
 class Home extends React.Component {
   constructor() {
     super();
@@ -24,14 +23,28 @@ class Home extends React.Component {
       value: "",
       suggestions: [],
       sortAscending: true,
+      page:0
     };
+    this.handlePageClick = this
+    .handlePageClick
+    .bind(this);
   }
+  handlePageClick = (e) => {
+    const selectedPage = e.selected;
+ console.log(selectedPage);
+
+ this.setState({page:selectedPage}, () => {
+  this.props.getProducts(this.state.page);
+ this.setState({ products: this.props.products.products });
+});
+ 
+};
   async componentDidMount() {
     const user = Pool.getCurrentUser();
     if (user) {
       this.props.getCart(user.getUsername());
     }
-    await this.props.getProducts();
+    await this.props.getProducts(this.state.page);
     this.setState({ products: this.props.products.products });
     this.onSuggestionsFetchRequested = debounce(
       500,
@@ -188,7 +201,7 @@ class Home extends React.Component {
 
   onSuggestionsClearRequested = () => {
     this.setState({ suggestions: [] });
-    this.props.getProducts();
+    this.props.getProducts(this.state.page);
     this.setState({ products: this.props.products.products });
   };
 
@@ -208,7 +221,6 @@ class Home extends React.Component {
     };
     return (
       <>
-        <Navbar />
         <div className="grid-container">
           <main>
             <div className="content">
@@ -250,8 +262,25 @@ class Home extends React.Component {
                 />
               </div>
             </div>
+            
           </main>
+        
         </div>
+        <div className="paginateDiv">
+                <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={20}
+                    initialPage={0}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={this.handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}/>
+            </div>
       </>
     );
   }

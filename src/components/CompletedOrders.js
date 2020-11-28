@@ -7,7 +7,6 @@ import formatCurrency from "../util";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
-import NavbarSeller from "./NavbarSeller";
 
 class CompletedOrders extends Component {
   constructor(props) {
@@ -43,7 +42,6 @@ class CompletedOrders extends Component {
     console.log(this.props.orders);
     return (
       <div>
-        <NavbarSeller />
         <br></br>
         {this.props.orders.orders.length === 0 ? (
           <h3 className="center">

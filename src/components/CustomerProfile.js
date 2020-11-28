@@ -1,5 +1,4 @@
 import React, { useState,}from 'react';
-import Navbar from './Navbar';
 import OrdersPlaced from './OrdersPlaced';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -44,7 +43,6 @@ function CustomerProfile() {
       }
         return (
             <>
-            <Navbar />    
       <div>
         <header className="header">
           <div className="navContainer">
@@ -94,7 +92,7 @@ function CustomerProfile() {
       First Name
     </Form.Label>
     <Col sm="10">
-      <Form.Control size="lg" plaintext readOnly value={firstname} />
+      <Form.Control size="lg" type="text" readOnly value={firstname} />
     </Col>
   </Form.Group>
 
@@ -103,7 +101,7 @@ function CustomerProfile() {
       Last Name
     </Form.Label>
     <Col sm="10">
-      <Form.Control size="lg" plaintext readOnly value={lastname} />
+      <Form.Control size="lg" type="text" readOnly value={lastname} />
     </Col>
   </Form.Group>
   <Form.Group as={Row} controlId="formPlaintextEmail">
@@ -111,7 +109,7 @@ function CustomerProfile() {
       Email
     </Form.Label>
     <Col sm="10">
-      <Form.Control size="lg" plaintext readOnly value={email}/>
+      <Form.Control size="lg" type="text" readOnly value={email}/>
     </Col>
   </Form.Group>
 

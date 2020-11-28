@@ -52,7 +52,7 @@ class SellerShopRegister extends Component {
     };
     console.log(newSeller);
     this.props.saveSeller(newSeller);
-    window.location.pathname = "/listproducts";
+    window.location.pathname = "/sellerhome";
   }
 
   changeProductImageHandler = (event) => {

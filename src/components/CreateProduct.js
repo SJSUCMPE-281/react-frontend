@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
 import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
@@ -141,7 +140,7 @@ class CreateProduct extends Component {
         this.props.updateSellerProduct(userId, updateProduct);
       }
     }
-    this.props.history.push("/listproducts");
+    this.props.history.push("/sellerhome");
     //window.location.pathname = '/listproducts';
   };
 
@@ -164,7 +163,7 @@ class CreateProduct extends Component {
   };
 
   cancel() {
-    this.props.history.push("/listproducts");
+    this.props.history.push("/sellerhome");
   }
 
   getTitle() {
@@ -189,7 +188,6 @@ class CreateProduct extends Component {
     console.log(this.props.user);
     return (
       <div>
-        <NavbarSeller />
         <br></br>
         {Object.keys(this.state.userState).length === 0 ? (
           <i className="fa fa-spinner fa-spin"></i>
@@ -197,7 +195,7 @@ class CreateProduct extends Component {
           <>
             {this.state.userState.shopName === null ? (
               <Container>
-                <Link to="/listproducts">
+                <Link to="/sellerhome">
                   <Button variant="primary">
                     Please Register Your Shop to Add Your Products
                   </Button>
