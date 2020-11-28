@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import formatCurrency from "../../util";
+import Filter from "./Filter";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
@@ -27,6 +28,7 @@ class Product extends Component {
       reviews: [],
       rating: "",
       review: "",
+      sort: "",
     };
   }
   async openModal(product) {
@@ -174,14 +176,22 @@ class Product extends Component {
     );
   }
 
-  render() {
-    const { products } = this.props.products;
-    console.log(this.props);
-    return (
-      <div>
+  sortProducts = (event) => {
+    const sort = event.target.value;
+    console.log(event.target.value);
+    this.setState({
+      sort: sort,
+    });
+  };
+  renderProducts() {
+    if (this.state.sort === "lowest") {
+      const sorted = this.props.products.products.sort((a, b) => {
+        return a.price - b.price;
+      });
+      return (
         <Fade bottom cascade>
           <ul className="products">
-            {products.map((product) => (
+            {sorted.map((product) => (
               <li key={product.productId}>
                 <div className="container product">
                   <a
@@ -222,6 +232,118 @@ class Product extends Component {
             ))}
           </ul>
         </Fade>
+      );
+    } else if (this.state.sort === "highest") {
+      const sorted = this.props.products.products.sort((a, b) => {
+        return b.price - a.price;
+      });
+      return (
+        <Fade bottom cascade>
+          <ul className="products">
+            {sorted.map((product) => (
+              <li key={product.productId}>
+                <div className="container product">
+                  <a
+                    href={"#" + product.productId}
+                    onClick={() => this.openModal(product)}
+                  >
+                    <img src={product.imageUrl} alt={product.productName}></img>
+                    <p>{product.productName}</p>
+                  </a>
+                  <Link to={"/shopview/" + product.sellerId}>
+                    <h5 className="text-muted">{product.shopName}</h5>
+                  </Link>
+                  <span>
+                    <span className="widthhalf">
+                      <ReactStars
+                        count={5}
+                        size={18}
+                        edit={false}
+                        isHalf={true}
+                        color="gray"
+                        activeColor="#f5b942"
+                        value={product.rating}
+                      />
+                    </span>
+                    {product.reviewCount}
+                  </span>
+                  <div className="product-price">
+                    <div>{product.price}</div>
+                    <button
+                      onClick={() => this.props.addToCart(product)}
+                      className="button primary"
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Fade>
+      );
+    } else {
+      const sorted = this.props.products.products.sort((a, b) => {
+        return b.productId - a.productId;
+      });
+      return (
+        <Fade bottom cascade>
+          <ul className="products">
+            {sorted.map((product) => (
+              <li key={product.productId}>
+                <div className="container product">
+                  <a
+                    href={"#" + product.productId}
+                    onClick={() => this.openModal(product)}
+                  >
+                    <img src={product.imageUrl} alt={product.productName}></img>
+                    <p>{product.productName}</p>
+                  </a>
+                  <Link to={"/shopview/" + product.sellerId}>
+                    <h5 className="text-muted">{product.shopName}</h5>
+                  </Link>
+                  <span>
+                    <span className="widthhalf">
+                      <ReactStars
+                        count={5}
+                        size={18}
+                        edit={false}
+                        isHalf={true}
+                        color="gray"
+                        activeColor="#f5b942"
+                        value={product.rating}
+                      />
+                    </span>
+                    {product.reviewCount}
+                  </span>
+                  <div className="product-price">
+                    <div>{product.price}</div>
+                    <button
+                      onClick={() => this.props.addToCart(product)}
+                      className="button primary"
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Fade>
+      );
+    }
+  }
+  render() {
+    const { products } = this.props.products;
+    console.log(this.props);
+    return (
+      <div>
+        <Filter
+          size={products.length}
+          sort={this.state.sort}
+          sortProducts={this.sortProducts}
+        ></Filter>
+        {this.renderProducts()}
         {this.renderProductModal()}
       </div>
     );
