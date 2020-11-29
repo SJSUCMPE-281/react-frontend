@@ -7,7 +7,6 @@ import formatCurrency from "../util";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
-import NavbarSeller from "./NavbarSeller";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -57,7 +56,7 @@ class OpenOrders extends Component {
       };
       console.log(newSale);
       this.props.updateSellerOrder(sellerId, newSale);
-      window.location.pathname = "/orders/ORDERED";
+      window.location.pathname = "/sellerhome/orders/ORDERED";
       this.closeModal();
     }
   };
@@ -66,7 +65,6 @@ class OpenOrders extends Component {
     console.log(this.state.sale);
     return (
       <div>
-        <NavbarSeller />
         <br></br>
         {this.props.orders.orders.length === 0 ? (
           <h3 className="center">Your shop doesn't have any orders yet!</h3>

@@ -34,7 +34,7 @@ function LoginComponent(props) {
         let group = data.accessToken.payload["cognito:groups"][0];
         if (group === props.user) {
           if (group === "CustomerGroup") {
-            history.push("/home");
+            history.push("/buyerhome");
           } else if (group === "SellerGroup") {
             history.push("/sellerhome");
           }

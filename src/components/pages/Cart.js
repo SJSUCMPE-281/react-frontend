@@ -76,14 +76,23 @@ class Cart extends Component {
     this.setState({ orderDetails: cart.orderDetails });
   }
   renderCart() {
+   
     if (!this.props.cart) {
-      return <div className="cart cart-header">Cart is Empty!</div>;
+      return <div className="cart cart-header"><span class="fa-stack fa-2x has-badge" data-count="0">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+    </span></div>;
     } else {
+      let cartCount = this.props.cart.orderDetails.length;
+      let cartCountString = `(`+cartCount+`)`;
       return (
         <div>
           <div className="cart cart-header">
             {" "}
-            You have {this.props.cart.orderDetails.length} in the cart{" "}
+            <span class="fa-stack fa-2x has-badge" data-count={cartCountString}>
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+          </span>
           </div>
           <div>
             <div className="cart">

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavbarSeller from "./NavbarSeller";
 import { connect } from "react-redux";
 import { saveMedia, clearMedia } from "../actions/mediaActions";
 import { getSeller } from "../actions/userActions";
@@ -56,7 +55,7 @@ class CreateProduct extends Component {
     const user = Pool.getCurrentUser();
     if (user) {
       const userId = user.getUsername();
-      this.props.getSeller(userId);
+      await this.props.getSeller(userId);
       this.setState({ userState: this.props.user.seller });
     }
 
@@ -137,12 +136,14 @@ class CreateProduct extends Component {
         updateProduct.productDescription = this.state.description;
         updateProduct.price = this.state.price;
         updateProduct.category = this.state.category;
-        updateProduct.mediaList = [...images];
+        if (images.length > 0) {
+          updateProduct.mediaList = [...images];
+        }
         this.props.updateSellerProduct(userId, updateProduct);
       }
     }
-    this.props.history.push("/listproducts");
-    //window.location.pathname = '/listproducts';
+    this.props.history.push("/sellerhome");
+    // window.location.pathname = "/sellerhome";
   };
 
   changeProductTitleHandler = (event) => {
@@ -164,7 +165,7 @@ class CreateProduct extends Component {
   };
 
   cancel() {
-    this.props.history.push("/listproducts");
+    this.props.history.push("/sellerhome");
   }
 
   getTitle() {
@@ -189,7 +190,6 @@ class CreateProduct extends Component {
     console.log(this.props.user);
     return (
       <div>
-        <NavbarSeller />
         <br></br>
         {Object.keys(this.state.userState).length === 0 ? (
           <i className="fa fa-spinner fa-spin"></i>
@@ -197,7 +197,7 @@ class CreateProduct extends Component {
           <>
             {this.state.userState.shopName === null ? (
               <Container>
-                <Link to="/listproducts">
+                <Link to="/sellerhome">
                   <Button variant="primary">
                     Please Register Your Shop to Add Your Products
                   </Button>

@@ -55,7 +55,7 @@ class SellerProducts extends Component {
   }
 
   editProduct = (product) => {
-    this.props.history.push(`/addproduct/${product.productId}`);
+    this.props.history.push(`/sellerhome/addproduct/${product.productId}`);
   };
 
   async deleteProduct(product) {

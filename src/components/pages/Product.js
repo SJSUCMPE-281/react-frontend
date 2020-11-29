@@ -201,7 +201,7 @@ class Product extends Component {
                     <img src={product.imageUrl} alt={product.productName}></img>
                     <p>{product.productName}</p>
                   </a>
-                  <Link to={"/shopview/" + product.sellerId}>
+                  <Link to={"/buyerhome/shopview/" + product.sellerId}>
                     <h5 className="text-muted">{product.shopName}</h5>
                   </Link>
                   <span>
@@ -250,7 +250,7 @@ class Product extends Component {
                     <img src={product.imageUrl} alt={product.productName}></img>
                     <p>{product.productName}</p>
                   </a>
-                  <Link to={"/shopview/" + product.sellerId}>
+                  <Link to={"/buyerhome/shopview/" + product.sellerId}>
                     <h5 className="text-muted">{product.shopName}</h5>
                   </Link>
                   <span>
@@ -299,7 +299,7 @@ class Product extends Component {
                     <img src={product.imageUrl} alt={product.productName}></img>
                     <p>{product.productName}</p>
                   </a>
-                  <Link to={"/shopview/" + product.sellerId}>
+                  <Link to={"/buyerhome/shopview/" + product.sellerId}>
                     <h5 className="text-muted">{product.shopName}</h5>
                   </Link>
                   <span>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import data from "../data.json";
-import Navbar from "./Navbar";
 import { getSeller } from "../actions/userActions";
 import { connect } from "react-redux";
 import Container from 'react-bootstrap/Container';
@@ -28,7 +27,6 @@ class ShopView extends Component {
   render() {
     return (
       <>
-        <Navbar />
         {Object.keys(this.state.userState).length === 0 ?
           <i className="fa fa-spinner fa-spin"></i> : <>
            {this.state.userState.mediaList.length === 0 ? null : 

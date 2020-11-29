@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavbarSeller from "./NavbarSeller";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -71,7 +70,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
   console.log(...images);
   console.log(this.state.file);
   this.props.saveSellerImages(sellerId,this.state.file);
-  window.location.pathname = "/sellerprofile";
+  window.location.pathname = "/sellerhome/sellerprofile";
   };
   handleBilling = () => {
     this.setState({ showBillingModal: true });
@@ -88,7 +87,6 @@ Pass Shop name and Shop description available in state attributes to the API.*/
 
     return (
       <>
-        <NavbarSeller />
         {Object.keys(this.state.userState).length === 0 ? (
           <i className="fa fa-spinner fa-spin"></i>
         ) : (
@@ -359,7 +357,7 @@ Pass Shop name and Shop description available in state attributes to the API.*/
                     </Form.Group>
                   </>
                 ) : (
-                  <Link to="/listproducts">
+                  <Link to="/sellerhome">
                     <Button variant="primary">Please Register Your Shop</Button>
                   </Link>
                 )}

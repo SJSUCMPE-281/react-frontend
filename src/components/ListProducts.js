@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import data from "../data.json";
-import NavbarSeller from "./NavbarSeller";
 import SellerProducts from "./SellerProducts";
 import { getSeller } from "../actions/userActions";
 import Pool from "../UserPool";
@@ -38,7 +37,6 @@ class ListProducts extends Component {
     console.log(this.state.userState);
     return (
       <>
-        <NavbarSeller />
         {Object.keys(this.state.userState).length === 0 ?
           <i className="fa fa-spinner fa-spin"></i> : <>
           {this.state.userState.shopName === null ? null :
