@@ -17,11 +17,11 @@ class ListProducts extends Component {
     };
   }
   async componentDidMount() {
-    const user = Pool.getCurrentUser();
+     const user = await Pool.getCurrentUser();
     if (user) {
       const id = user.getUsername();
       const response = await this.props.getSeller(id);
-      console.log()
+      console.log(id);
       this.setState({ userState: this.props.user.seller });
     }
   }
