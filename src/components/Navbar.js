@@ -5,7 +5,7 @@ import Pool from "../UserPool";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-function Navbar() {
+function Navbar(props) {
   let history = useHistory();
   const [click, setClick] = useState(false);
 
@@ -16,12 +16,12 @@ function Navbar() {
     const user = Pool.getCurrentUser();
     if (user) {
       console.log("user exits");
+      props.signout();
       user.signOut();
       localStorage.removeItem("cartItems");
     }
     history.push("/");
   };
-
   return (
     <>
       <nav className="navbar">

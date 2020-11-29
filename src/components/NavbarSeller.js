@@ -5,7 +5,7 @@ import Pool from "../UserPool";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-function NavbarSeller() {
+function NavbarSeller(props) {
   let history = useHistory();
   const [click, setClick] = useState(false);
 
@@ -16,6 +16,7 @@ function NavbarSeller() {
     const user = Pool.getCurrentUser();
     if (user) {
       console.log("user exits");
+      props.signout();
       user.signOut();
       localStorage.removeItem("cartItems");
     }
@@ -33,6 +34,7 @@ function NavbarSeller() {
           <i className={click ? "fas fa-times" : "fas fa-bars"} />
         </div>
         <ul className={click ? "nav-menu active" : "nav-menu"}>
+       
           <li className="nav-item">
             <Link
               to="/sellerhome/orders/ORDERED"
@@ -51,9 +53,10 @@ function NavbarSeller() {
               Closed Orders
             </Link>
           </li>
+          
           <li className="nav-item">
             <Link
-              to="/sellerhome"
+              to="/sellerhome/products"
               className="nav-links"
               onClick={closeMobileMenu}
             >

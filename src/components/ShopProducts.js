@@ -118,7 +118,6 @@ class ShopProducts extends Component {
                       </span>
                       ({product.reviewCount})
                     </span>
-
                     <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                     </div>

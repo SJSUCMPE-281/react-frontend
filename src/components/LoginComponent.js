@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
 import SignUpComponent from "./SignUpComponent";
-
+import { SocialIcon } from 'react-social-icons';
 function LoginComponent(props) {
   console.log(props.user);
   let history = useHistory();
@@ -119,6 +119,15 @@ function LoginComponent(props) {
                 data-width=""
               ></div>
               <p onClick={showSignUp}>New User? Sign Up</p>
+              { props.user ===  "CustomerGroup"
+  ? <a href={process.env.REACT_APP_FB_BUYER}><SocialIcon network="facebook" /></a>
+  : [
+      (props.user ===  "SellerGroup"
+        ? <a href={process.env.REACT_APP_FB_SELLER} ><SocialIcon network="facebook" /></a>
+        : null
+      )
+    ]
+}
             </Alert>
             <Alert show={warn} variant="danger">
               <Alert.Heading>
