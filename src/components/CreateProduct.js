@@ -55,7 +55,7 @@ class CreateProduct extends Component {
     const user = Pool.getCurrentUser();
     if (user) {
       const userId = user.getUsername();
-      this.props.getSeller(userId);
+      await this.props.getSeller(userId);
       this.setState({ userState: this.props.user.seller });
     }
 
@@ -136,12 +136,14 @@ class CreateProduct extends Component {
         updateProduct.productDescription = this.state.description;
         updateProduct.price = this.state.price;
         updateProduct.category = this.state.category;
-        updateProduct.mediaList = [...images];
+        if (images.length > 0) {
+          updateProduct.mediaList = [...images];
+        }
         this.props.updateSellerProduct(userId, updateProduct);
       }
     }
     this.props.history.push("/sellerhome");
-    //window.location.pathname = '/listproducts';
+    // window.location.pathname = "/sellerhome";
   };
 
   changeProductTitleHandler = (event) => {
