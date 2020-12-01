@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import { useHistory } from "react-router-dom";
 import SignUpComponent from "./SignUpComponent";
-import { SocialIcon } from 'react-social-icons';
+import { SocialIcon } from "react-social-icons";
 function LoginComponent(props) {
   console.log(props.user);
   let history = useHistory();
@@ -55,7 +55,9 @@ function LoginComponent(props) {
           <div>
             <SignUpComponent groupname={props.user} />
             <Container>
-              <p onClick={showLogin}>Back to Login screen</p>
+              <Button variant="info" onClick={showLogin}>
+                Back to Login screen
+              </Button>
             </Container>
           </div>
         </div>
@@ -118,16 +120,22 @@ function LoginComponent(props) {
                 data-use-continue-as="false"
                 data-width=""
               ></div>
-              <p onClick={showSignUp}>New User? Sign Up</p>
-              { props.user ===  "CustomerGroup"
-  ? <a href={process.env.REACT_APP_FB_BUYER}><SocialIcon network="facebook" /></a>
-  : [
-      (props.user ===  "SellerGroup"
-        ? <a href={process.env.REACT_APP_FB_SELLER} ><SocialIcon network="facebook" /></a>
-        : null
-      )
-    ]
-}
+              <Button variant="info" onClick={showSignUp}>
+                New User? Sign Up
+              </Button>{" "}
+              {props.user === "CustomerGroup" ? (
+                <a href={process.env.REACT_APP_FB_BUYER}>
+                  <SocialIcon network="facebook" />
+                </a>
+              ) : (
+                [
+                  props.user === "SellerGroup" ? (
+                    <a href={process.env.REACT_APP_FB_SELLER}>
+                      <SocialIcon network="facebook" />
+                    </a>
+                  ) : null,
+                ]
+              )}
             </Alert>
             <Alert show={warn} variant="danger">
               <Alert.Heading>
