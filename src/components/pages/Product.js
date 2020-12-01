@@ -106,7 +106,7 @@ class Product extends Component {
                   </p>
                   <p>{product.productDescription}</p>
                   <div className="product-price">
-                    <div>{product.price}</div>
+                    <div>${product.price}</div>
                     <button
                       className="button primary"
                       onClick={() => {
@@ -219,7 +219,7 @@ class Product extends Component {
                     {product.reviewCount}
                   </span>
                   <div className="product-price">
-                    <div>{product.price}</div>
+                    <div>${product.price}</div>
                     <button
                       onClick={() => this.props.addToCart(product)}
                       className="button primary"
@@ -268,7 +268,7 @@ class Product extends Component {
                     {product.reviewCount}
                   </span>
                   <div className="product-price">
-                    <div>{product.price}</div>
+                    <div>${product.price}</div>
                     <button
                       onClick={() => this.props.addToCart(product)}
                       className="button primary"
@@ -317,7 +317,7 @@ class Product extends Component {
                     {product.reviewCount}
                   </span>
                   <div className="product-price">
-                    <div>{product.price}</div>
+                    <div>${product.price}</div>
                     <button
                       onClick={() => this.props.addToCart(product)}
                       className="button primary"
