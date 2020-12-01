@@ -35,6 +35,11 @@ Solution for Customers:
 6.	Notification via SMS and Email.
 7.	OAUTH for Facebook.
 
+## Architecture
+- **Architecture**
+
+![Architecture](https://github.com/SJSUCMPE-281/react-frontend/blob/master/images/project281%20(1).jpg)
+
 ## Demo ScreenShots
 - **Home Page**
 
