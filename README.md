@@ -3,7 +3,7 @@
 * University Name: [San Jose State University](http://www.sjsu.edu/)
 * Course: [Cloud Technologies](http://info.sjsu.edu/web-dbgen/catalog/courses/CMPE281.html)
 * Professor [Sanjay Garje](https://www.linkedin.com/in/sanjaygarje/)
-* Student: [Anisha Agarwal](www.linkedin.com/in/anisha25)
+* Student: [Anisha Agarwal](https://www.linkedin.com/in/anisha25)
 * Student: [Arshia Sali](https://www.linkedin.com/in/arshia-sali-842417101/)
 * Student: [Jeena Thampi](http://linkedin.com/in/jeena-thampi-61a350b3)
 * Student: [Priti Sharma](https://www.linkedin.com/in/priti-sharma-68b60b64)
