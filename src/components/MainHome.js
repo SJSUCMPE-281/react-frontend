@@ -9,7 +9,6 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 export default function MainHome() {
-
   return (
     <>
       <MainHeader />
@@ -48,7 +47,7 @@ export default function MainHome() {
                 <Card.Body>
                   <Card.Title>Register Your Shop right now!</Card.Title>
                   <Card.Text>
-                    Millions of customers awaiting your prodcuts just a step
+                    Millions of customers awaiting your products just a step
                     away!{" "}
                   </Card.Text>
                 </Card.Body>

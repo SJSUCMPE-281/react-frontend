@@ -21,10 +21,6 @@ class BuyerHomePage extends Component {
   }
 
   async componentDidMount() {
-    const loggedIn = Pool.getCurrentUser();
-    if (loggedIn === null) {
-      this.props.history.push("/");
-    }
     await new Promise((resolve, reject) => {
       var authDetails = new CognitoAuth(auth_details_buyer);
       console.log(authDetails);
@@ -62,7 +58,6 @@ class BuyerHomePage extends Component {
           reject("err");
         },
       };
-      console.log(this.props);
     });
 
     const user = Pool.getCurrentUser();
