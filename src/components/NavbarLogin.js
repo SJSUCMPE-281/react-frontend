@@ -38,18 +38,7 @@ function NavbarLogin(props) {
               I am a Seller
             </Link>
           </li>
-          <li className='nav-item'>
-            <Link
-              to='/admin'
-              className='nav-links'
-              style={{ backgroundColor: props.user==="AdminGroup" ? 'blue' : '#1A171B' }}
-              onClick={closeMobileMenu}
-            >
-              Admin
-            </Link>
-          </li>
-        </ul>
-       
+        </ul> 
       </nav>
     </>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CustomerLogin from "./components/CustomerLogin";
-import AdminLogin from "./components/AdminLogin";
 import SellerLogin from "./components/SellerLogin";
 import { Account } from "./components/Accounts";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -19,7 +18,6 @@ function App() {
           <Switch>
             <Route path="/" exact component={MainHome} />
             <Route path="/customer"  component={CustomerLogin} />
-            <Route path="/admin" component={AdminLogin} />
             <Route path="/seller" component={SellerLogin} />
             <Route path="/buyerhome"  component={BuyerHomePage} />           
             <Route path="/sellerhome" component={SellerHomePage} />
