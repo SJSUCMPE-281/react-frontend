@@ -10,7 +10,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import MainHome from "./components/MainHome";
 import BuyerHomePage from "./components/BuyerComponents/BuyerHomePage";
-import SellerHomePage from './components/SellerComponents/SellerHomePage';
+import SellerHomePage from "./components/SellerComponents/SellerHomePage";
+
 function App() {
   return (
     <Provider store={store}>
@@ -18,10 +19,10 @@ function App() {
         <Account>
           <Switch>
             <Route path="/" exact component={MainHome} />
-            <Route path="/customer"  component={CustomerLogin} />
+            <Route path="/customer" component={CustomerLogin} />
             <Route path="/admin" component={AdminLogin} />
             <Route path="/seller" component={SellerLogin} />
-            <Route path="/buyerhome"  component={BuyerHomePage} />           
+            <Route path="/buyerhome" component={BuyerHomePage} />
             <Route path="/sellerhome" component={SellerHomePage} />
           </Switch>
         </Account>
