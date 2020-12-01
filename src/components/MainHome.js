@@ -9,19 +9,12 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 export default function MainHome() {
-  let history = useHistory();
 
-  const admin = () => {
-    history.push("/admin");
-  };
   return (
     <>
       <MainHeader />
 
       <Container>
-        <Button variant="info" className="margin" onClick={admin}>
-          Admin Panel
-        </Button>
         <div className="middle">
           <Fade bottom cascade>
             <CardDeck className="width">
