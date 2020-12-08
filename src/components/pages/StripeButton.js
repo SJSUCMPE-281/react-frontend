@@ -57,7 +57,7 @@ class StripeButton extends Component {
         amount={stripePrice}
         billingAddress
         label="Checkout"
-        name="Wolf Elite"
+        name="Saas Shoppe"
         image="https://svgshare.com/i/CUz.svg"
         description={`Your total is ${cart.totalAmount}`}
         panelLabel="Pay Now"
