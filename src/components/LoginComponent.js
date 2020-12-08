@@ -127,15 +127,7 @@ function LoginComponent(props) {
                 <a href={process.env.REACT_APP_FB_BUYER}>
                   <SocialIcon network="facebook" />
                 </a>
-              ) : (
-                [
-                  props.user === "SellerGroup" ? (
-                    <a href={process.env.REACT_APP_FB_SELLER}>
-                      <SocialIcon network="facebook" />
-                    </a>
-                  ) : null,
-                ]
-              )}
+              ) : null }
             </Alert>
             <Alert show={warn} variant="danger">
               <Alert.Heading>
